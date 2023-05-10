@@ -1,13 +1,17 @@
-# Next / React App
+
 # GWeather - global weather application.
 
-# Screenshot
+## Screenshot
 
 ![Screenshot 2023-03-02 at 17 14 42](https://user-images.githubusercontent.com/60422984/222469756-89ab2866-f814-4cf4-937f-cf2ca0abc10b.png)
 
 
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+
+## Deployment
+
+[gw]()
 
 ## Getting Started
 
