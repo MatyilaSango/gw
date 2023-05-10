@@ -1,0 +1,14 @@
+.search-option-wrapper{
+    min-height: 25px;
+    background-color: rgba(255, 255, 255, 0.2);
+    margin: 3px 0;
+    color: black;
+    padding: 0 10px;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+.search-option-wrapper:hover{
+    background-color: rgba(255, 255, 255, 0.8);
+}

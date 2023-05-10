@@ -1,0 +1,131 @@
+
+.App {
+  display: flex;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+}
+.App-img {
+  height: auto;
+  width: 100%;
+}
+.components-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  padding: 70px 1rem;
+  overflow-y: scroll;
+}
+.components-container-top {
+  width: 100%;
+  height: 300px;
+  display: flex;
+}
+.components-container-top__hourly {
+  height: 100%;
+  width: calc(100% - 420px);
+  padding: 0 10px 0 0;
+  margin-left: 20px;
+  display: flex;
+  overflow-x: scroll;
+  border-radius: 20px;
+}
+.components-container-bottom {
+  height: auto;
+  background-color: #ffffff30;
+  border-radius: 20px;
+  margin-top: 20px;
+  overflow: hidden;
+  box-shadow: 0px 0px 10px 5px #00000050;
+  min-width: 400px;
+}
+.components-container-bottom-nav {
+  height: 60px;
+  background-color: #4726a450;
+  color: white;
+  display: flex;
+}
+.components-container-bottom-nav__text {
+  height: 100%;
+  width: 300px;
+  background-color: #4726a4;
+  display: flex;
+  align-items: center;
+  padding-left: 50px;
+  font-size: 25px;
+  text-shadow: 0px 10px 2px #00000070;
+}
+.components-container-bottom-nav__options {
+  height: 100%;
+  width: calc(100% - 300px);
+  display: flex;
+  padding-left: 20px;
+}
+.components-container-bottom-dnsstal {
+  padding: 10px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+}
+.sunrise-sunset-wrapper {
+  height: fit-content;
+}
+.temperature-history-wrapper {
+  height: fit-content;
+  width: 250px;
+  background-color: #fffdfd50;
+  padding: 10px;
+  margin: 0 0 0 20px;
+  color: black;
+}
+.temperature-history-wrapper__top {
+  font-size: 22px;
+  display: flex;
+  font-weight: 500;
+  text-shadow: 0px 5px 7px #00000090;
+}
+
+.loading-wrapper {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(24, 24, 24, 0.462);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.loading-wrapper__hide {
+  display: none;
+}
+.loading-wrapper__gif {
+  width: 200px;
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+.logo{
+  height: auto;
+  width: 180px;
+  position: absolute;
+  top: 10px;
+  border-radius: 10px;
+}
+
+@media screen and  (max-width: 700px) {
+  .components-container-top{
+    flex-direction: column;
+    justify-content: center;
+    height: 600px;
+  }
+  .components-container-top .components-container-top__hourly{
+    width: 100%;
+  }
+  .components-container-top .today-wrapper{
+    height: 700px;
+    margin-bottom: 20px;
+  }
+}

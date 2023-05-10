@@ -1,0 +1,8 @@
+.table-wrapper{
+    background-color: #FFFFFF50;
+    box-shadow: inset 0 4px 5px #00000025;
+    color: black;
+}
+.table-wrapper table{
+    width: 100%;
+}
