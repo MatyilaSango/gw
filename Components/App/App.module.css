@@ -32,6 +32,14 @@
   overflow-x: scroll;
   border-radius: 20px;
 }
+.components-container-top__hourly::-webkit-scrollbar{
+  background-color: transparent;
+  height: 5px;
+}
+.components-container-top__hourly::-webkit-scrollbar-thumb{
+  background-color: #4726a450;
+  border-radius: 5px;
+}
 .components-container-bottom {
   height: auto;
   background-color: #ffffff30;
@@ -120,9 +128,11 @@
     flex-direction: column;
     justify-content: center;
     height: 600px;
+    
   }
   .components-container-top .components-container-top__hourly{
     width: 100%;
+    margin-top: 20px;
   }
   .components-container-top .today-wrapper{
     height: 700px;

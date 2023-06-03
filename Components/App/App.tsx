@@ -123,10 +123,7 @@ function App() {
       </Head>
 
       <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
-
-      {/* <Suspense fallback={<Image src={loadingGif} alt="loading" />}>
-
-      </Suspense> */}
+      
       <div className={styles["components-container"]} id="components-container ">
         <div className={styles["components-container-top"]}>
           {todayData && (
