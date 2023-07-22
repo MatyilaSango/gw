@@ -1,14 +1,11 @@
 import axios from "axios";
-let cheerio = require("cheerio");
+import cheerio from "cheerio";
 import { locationsType } from "../../../../../Types/types";
+import LocationModel from "../../Models/Location";
 
 export class Locations {
 
-    private _locations: locationsType = {
-        search_parameter: "",
-        weather_site: "accuweather",
-        available_locations: [],
-    };
+    private _locations: locationsType = new LocationModel().model
 
     constructor() { }
 

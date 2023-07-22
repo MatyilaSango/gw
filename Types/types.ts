@@ -37,7 +37,7 @@ export type hourlydataType = {
     real_feel_shade: string,
     max_uv_index: string,
     wind: string,
-    gusts: string,
+    wind_gusts: string,
     humidity: string,
     indoor_humidity: string,
     dew_point: string,
