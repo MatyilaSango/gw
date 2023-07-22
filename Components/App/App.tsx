@@ -17,9 +17,6 @@ import DayNight from "../Daily/DayNight";
 import SunriseSunset from "../Daily/SunriseSunset";
 import TempHistory from "../Daily/TempHistory";
 import Head from "next/head";
-import todayHandler from "@/Scapping/src/Controller/Today/Today";
-import hourlyHandler from "@/Scapping/src/Controller/Hourly/Hourly";
-import dailyHandler from "@/Scapping/src/Controller/Daily/Daily";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -43,41 +40,34 @@ function App() {
         ?.classList.remove(`.${styles["loading-wrapper__hide"]}`);
 
       //Fetching today data
-      // fetch("../../api/src/Controller/Today/Today", {
-      //   method: "post",
-      //   body: JSON.stringify(search)
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setTodayData(res)
-      //   })
-      // })
-
-      todayHandler(search).then(res => console.log(res as todayDataType) )
+      fetch("../../api/src/Controller/Today/Today", {
+        method: "post",
+        body: JSON.stringify(search)
+      }).then(res => {
+        res.json().then(res => {
+          setTodayData(res)
+        })
+      })
 
       //Fetching hourly data
-      // fetch("../../api/src/Controller/Hourly/Hourly", {
-      //   method: "post",
-      //   body: JSON.stringify(search)
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setHourlyData(res)
-      //   })
-      // })
-
-      hourlyHandler(search).then(res => console.log(res as hourlyDataType))
+      fetch("../../api/src/Controller/Hourly/Hourly", {
+        method: "post",
+        body: JSON.stringify(search)
+      }).then(res => {
+        res.json().then(res => {
+          setHourlyData(res)
+        })
+      })
 
       //Fetching daily data
-
-      // fetch("../../api/src/Controller/Daily/Daily", {
-      //   method: "post",
-      //   body: JSON.stringify({search, dailyOption})
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setDailyData(res)
-      //   })
-      // })
-
-      dailyHandler(search, dailyOption).then(res => console.log(res as dailyDataType))
+      fetch("../../api/src/Controller/Daily/Daily", {
+        method: "post",
+        body: JSON.stringify({search, dailyOption})
+      }).then(res => {
+        res.json().then(res => {
+          setDailyData(res)
+        })
+      })
 
       if (dailyData) {
         const tempDN = []
@@ -117,7 +107,7 @@ function App() {
       .querySelector(`.${todayStyles["today-wrapper__input-search__search"]}`)
       ?.classList.add(`${todayStyles["removeLocations"]}`);
   };
-
+  
   //const handleSetDailyOption = (parameter: String): void => {};
 
   return (
@@ -133,7 +123,7 @@ function App() {
       </Head>
 
       <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
-
+      
       <div className={styles["components-container"]} id="components-container ">
         <div className={styles["components-container-top"]}>
           {todayData && (
@@ -220,7 +210,7 @@ function App() {
           <Image src={loadingGif} alt="loading" />
         </div>
       </div>
-
+    
     </div>
   );
 }
