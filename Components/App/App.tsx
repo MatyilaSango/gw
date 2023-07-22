@@ -141,6 +141,7 @@ function App() {
                 hour={data_.hour}
                 icon={data_.icon}
                 temp={data_.temp}
+                type={data_.type}
               />
             ))}
           </div>
