@@ -1,5 +1,5 @@
 import axios from "axios";
-let cheerio = require("cheerio");
+import cheerio from "cheerio";
 import { deleteHourly, getHourly, setHourly } from "../../Storage";
 import { hourlydataType, hourlyDataType } from "../../../../../Types/types"
 import HourlyModel from "../../Models/Hourly";
@@ -58,7 +58,7 @@ export class Hourly {
                     real_feel_shade: "",
                     max_uv_index: "",
                     wind: "",
-                    gusts: "",
+                    wind_gusts: "",
                     humidity: "",
                     indoor_humidity: "",
                     dew_point: "",
@@ -69,79 +69,82 @@ export class Hourly {
                     icon: ""
                 }
 
-                tempHourlyData.hour = $(this).find(".hourly-card-nfl-header").find(".date").text()
-                tempHourlyData.temp = $(this).find(".hourly-card-nfl-header").find(".temp").text()
-                tempHourlyData.precip = $(this).find(".hourly-card-nfl-header").find(".precip").text().trim()
-                tempHourlyData.type = $(this).find(".hourly-card-nfl-content").find(".phrase").text()
-                tempHourlyData.icon = "https://www.accuweather.com" + <string> $(this).find(".hourly-card-nfl-header").find(".hourly-card-subcontaint:nth-child(1)").find("svg").data("src")
-
-                let next_child: number = 1;
-                while(next_child <= 12){
-                    let tempdata: string = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).text()
-                    if(tempdata.includes("RealFeel®")){
-                        tempHourlyData.real_feel = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
+                tempHourlyData.hour = $(this).find(".hourly-card-top").find(".date").text()
+                tempHourlyData.temp = $(this).find(".hourly-card-top").find(".temp").text()
+                tempHourlyData.precip = $(this).find(".hourly-card-top").find(".precip").text().trim()
+                tempHourlyData.type = $(this).find(".hourly-card-top").find(".phrase").text()
+                tempHourlyData.icon = "https://www.accuweather.com" + <string> $(this).find(".hourly-card-top").find("svg").data("src")
+                
+                $(this).find(`.panel`).each(function(this){
+                    let next_child: number = 1;
+                    while(next_child <= 12){
+                        let tempdata: string = $(this).find(`p:nth-child(${next_child})`).text()
+                        if(tempdata.includes("RealFeel®")){
+                            tempHourlyData.real_feel = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("RealFeel Shade")){
+                            tempHourlyData.real_feel_shade = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Max UV Index")){
+                            tempHourlyData.max_uv_index = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Wind Gusts")){
+                            tempHourlyData.wind_gusts = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Wind")){
+                            tempHourlyData.wind = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Indoor Humidity")){
+                            tempHourlyData.indoor_humidity = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Humidity")){
+                            tempHourlyData.humidity = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Dew Point")){
+                            tempHourlyData.dew_point = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Air Quality")){
+                            tempHourlyData.air_quality = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Cloud Cover")){
+                            tempHourlyData.cloudy_cover = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Visibility")){
+                            tempHourlyData.visibility = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        }
+                        else if(tempdata.includes("Cloud Ceiling")){
+                            tempHourlyData.cloud_ceiling = $(this).find(`p:nth-child(${next_child})`).find("span").text()
+                            next_child+=1 
+                            continue
+                        } 
+                        else{
+                            next_child+=1 
+                        }              
                     }
-                    else if(tempdata.includes("RealFeel Shade")){
-                        tempHourlyData.real_feel_shade = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Max UV Index")){
-                        tempHourlyData.max_uv_index = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Wind")){
-                        tempHourlyData.wind = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Gusts")){
-                        tempHourlyData.gusts = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Humidity")){
-                        tempHourlyData.humidity = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Indoor Humidity")){
-                        tempHourlyData.indoor_humidity = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Dew Point")){
-                        tempHourlyData.dew_point = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Air Quality")){
-                        tempHourlyData.air_quality = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Cloud Cover")){
-                        tempHourlyData.cloudy_cover = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Visibility")){
-                        tempHourlyData.visibility = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    }
-                    else if(tempdata.includes("Cloud Ceiling")){
-                        tempHourlyData.cloud_ceiling = $(this).find(".hourly-card-nfl-content").find(`.panel p:nth-child(${next_child})`).find("span").text()
-                        next_child+=1 
-                        continue
-                    } 
-                    else{
-                        next_child+=1 
-                    }              
-                }           
+                })
+                           
                 that._hourlyData.data.push(tempHourlyData)      
             })
             this._hourlyData.search_parameter = search  

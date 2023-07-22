@@ -1,5 +1,5 @@
 import axios from "axios";
-let cheerio = require("cheerio");
+import cheerio from "cheerio";
 import { locationsType } from "../../../../../Types/types";
 import LocationModel from "../../Models/Location";
 
