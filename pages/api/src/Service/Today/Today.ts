@@ -1,5 +1,5 @@
 import axios from "axios";
-let cheerio = require("cheerio");
+import cheerio from "cheerio";
 import { todayDataType } from "../../../../../Types/types";
 import { setToday, getToday, deleteToday } from "../../Storage"
 
