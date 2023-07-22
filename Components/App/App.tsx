@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import todayStyles from "../Today/Today.module.css"
 import Image from "next/image";
@@ -28,7 +28,7 @@ function App() {
   const [dailyData, setDailyData] = useState<dailyDataType>();
   const [day_night, setDay_night] = useState<dataType[] | any[]>([]);
   const [reRender, setreRender] = useState<boolean>(true);
-  const [dailyOption] = useState<String>("0");
+  const [dailyOption] = useState<string>("0");
   const [backgroundPic, setBackgroundPic] = useState<string>("");
   const [locTime, setLocTime] = useState<Date>(new Date());
   //const TEN_MINUTES: number = 600000;
@@ -62,7 +62,7 @@ function App() {
       //Fetching daily data
       fetch("../../api/src/Controller/Daily/Daily", {
         method: "post",
-        body: JSON.stringify({ search, dailyOption })
+        body: JSON.stringify({search, dailyOption})
       }).then(res => {
         res.json().then(res => {
           setDailyData(res)
@@ -107,7 +107,7 @@ function App() {
       .querySelector(`.${todayStyles["today-wrapper__input-search__search"]}`)
       ?.classList.add(`${todayStyles["removeLocations"]}`);
   };
-
+  
   //const handleSetDailyOption = (parameter: String): void => {};
 
   return (
@@ -123,7 +123,7 @@ function App() {
       </Head>
 
       <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
-
+      
       <div className={styles["components-container"]} id="components-container ">
         <div className={styles["components-container-top"]}>
           {todayData && (
@@ -210,7 +210,7 @@ function App() {
           <Image src={loadingGif} alt="loading" />
         </div>
       </div>
-
+    
     </div>
   );
 }
