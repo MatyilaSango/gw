@@ -2,27 +2,11 @@ import axios from "axios";
 let cheerio = require("cheerio");
 import { todayDataType } from "../../../../../Types/types";
 import { setToday, getToday, deleteToday } from "../../Storage"
+import TodayModel from "../../Models/Today";
 
 export class Today {
 
-    private _data_by_location: todayDataType  = {
-        search_parameter: "",
-        weather_site: "accuweather",
-        data: {
-            title: "Current weather",
-            time: "",
-            offset: "",
-            date: new Date(),
-            temp: "",
-            real_feel: "",
-            air_quality: "",
-            wind: "",
-            wind_gusts: "",
-            type: "",
-            icon: ""
-        },
-    };
-
+    private _data_by_location: todayDataType = new TodayModel().model
     constructor() {}
 
     public isFreshData = (data: todayDataType): boolean => {

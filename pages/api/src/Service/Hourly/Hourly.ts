@@ -2,14 +2,11 @@ import axios from "axios";
 let cheerio = require("cheerio");
 import { deleteHourly, getHourly, setHourly } from "../../Storage";
 import { hourlydataType, hourlyDataType } from "../../../../../Types/types"
+import HourlyModel from "../../Models/Hourly";
 
 export class Hourly {
 
-    private _hourlyData: hourlyDataType = {
-        search_parameter: "",
-        weather_site: "accuwether",
-        data: []
-    }
+    private _hourlyData: hourlyDataType = new HourlyModel().model
     constructor(){}
 
     public isFreshData = (data: hourlyDataType): boolean => {
