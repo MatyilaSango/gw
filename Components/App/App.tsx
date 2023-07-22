@@ -150,7 +150,7 @@ function App() {
           <div className={styles["components-container-bottom"]}>
             <div className={styles["components-container-bottom-nav"]}>
               <div className={styles["components-container-bottom-nav__text"]}>
-                <span>Dail Weather</span>
+                <span>Daily Weather</span>
               </div>
               <div className={styles["components-container-bottom-nav__options"]}>
                 {/* <Options handleSetDailyOption={handleSetDailyOption} /> */}
