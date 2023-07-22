@@ -62,7 +62,7 @@ function App() {
       //Fetching daily data
       fetch("../../api/src/Controller/Daily/Daily", {
         method: "post",
-        body: JSON.stringify({search, dailyOption})
+        body: JSON.stringify({ search, dailyOption })
       }).then(res => {
         res.json().then(res => {
           setDailyData(res)
@@ -70,10 +70,10 @@ function App() {
       })
 
       if (dailyData) {
-        setDay_night([
-          dailyData?.data.day_night.day,
-          dailyData?.data.day_night.night,
-        ]);
+        const tempDN = []
+        dailyData?.data.day_night?.day ? tempDN.push(dailyData?.data.day_night?.day) : 0
+        dailyData?.data.day_night?.night ? tempDN.push(dailyData?.data.day_night?.night) : 0
+        setDay_night(tempDN);
 
         document
           .querySelector(`.${styles["loading-wrapper"]}`)
@@ -107,7 +107,7 @@ function App() {
       .querySelector(`.${todayStyles["today-wrapper__input-search__search"]}`)
       ?.classList.add(`${todayStyles["removeLocations"]}`);
   };
-  
+
   //const handleSetDailyOption = (parameter: String): void => {};
 
   return (
@@ -123,7 +123,7 @@ function App() {
       </Head>
 
       <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
-      
+
       <div className={styles["components-container"]} id="components-container ">
         <div className={styles["components-container-top"]}>
           {todayData && (
@@ -210,7 +210,7 @@ function App() {
           <Image src={loadingGif} alt="loading" />
         </div>
       </div>
-    
+
     </div>
   );
 }
