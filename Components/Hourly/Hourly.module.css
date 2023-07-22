@@ -14,12 +14,13 @@
     font-size: 20px;
     font-weight: 600;
 }
-.Hourly-Wrapper__icon{
+.Hourly-Wrapper__icon_type{
     height: 60%;
 }
 .Hourly-Wrapper__time,
-.Hourly-Wrapper__icon,
-.Hourly-Wrapper__temp{
+.Hourly-Wrapper__icon_type,
+.Hourly-Wrapper__temp,
+.Hourly-Wrapper__type{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -27,7 +28,13 @@
 .Hourly-Wrapper span{
     text-shadow: 0px 12px 2px #000000;
 }
-.Hourly-Wrapper__icon__img{
+.Hourly-Wrapper__icon_type{
+    flex-flow: row wrap;
+}
+.Hourly-Wrapper__icon_type__img{
     height: 50%;
     width: auto;
+}
+.Hourly-Wrapper__type{
+    font-size: 15px;
 }

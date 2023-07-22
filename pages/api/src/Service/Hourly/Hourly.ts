@@ -72,7 +72,7 @@ export class Hourly {
                 tempHourlyData.hour = $(this).find(".hourly-card-top").find(".date").text()
                 tempHourlyData.temp = $(this).find(".hourly-card-top").find(".temp").text()
                 tempHourlyData.precip = $(this).find(".hourly-card-top").find(".precip").text().trim()
-                tempHourlyData.type = $(this).find(".hourly-card-top").find(".phrase").text()
+                tempHourlyData.type = $(this).find(".phrase").text()
                 tempHourlyData.icon = "https://www.accuweather.com" + <string> $(this).find(".hourly-card-top").find("svg").data("src")
                 
                 $(this).find(`.panel`).each(function(this){
