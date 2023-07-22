@@ -1,4 +1,4 @@
-import React, { Suspense, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import todayStyles from "../Today/Today.module.css"
 import Image from "next/image";
@@ -17,6 +17,9 @@ import DayNight from "../Daily/DayNight";
 import SunriseSunset from "../Daily/SunriseSunset";
 import TempHistory from "../Daily/TempHistory";
 import Head from "next/head";
+import todayHandler from "@/Scapping/src/Controller/Today/Today";
+import hourlyHandler from "@/Scapping/src/Controller/Hourly/Hourly";
+import dailyHandler from "@/Scapping/src/Controller/Daily/Daily";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -28,7 +31,7 @@ function App() {
   const [dailyData, setDailyData] = useState<dailyDataType>();
   const [day_night, setDay_night] = useState<dataType[] | any[]>([]);
   const [reRender, setreRender] = useState<boolean>(true);
-  const [dailyOption] = useState<String>("0");
+  const [dailyOption] = useState<string>("0");
   const [backgroundPic, setBackgroundPic] = useState<string>("");
   const [locTime, setLocTime] = useState<Date>(new Date());
   //const TEN_MINUTES: number = 600000;
@@ -40,34 +43,40 @@ function App() {
         ?.classList.remove(`.${styles["loading-wrapper__hide"]}`);
 
       //Fetching today data
-      fetch("../../api/src/Controller/Today/Today", {
-        method: "post",
-        body: JSON.stringify(search)
-      }).then(res => {
-        res.json().then(res => {
-          setTodayData(res)
-        })
-      })
+      // fetch("../../api/src/Controller/Today/Today", {
+      //   method: "post",
+      //   body: JSON.stringify(search)
+      // }).then(res => {
+      //   res.json().then(res => {
+      //     setTodayData(res)
+      //   })
+      // })
+
+      todayHandler(search).then(res => console.log(res as todayDataType) )
 
       //Fetching hourly data
-      fetch("../../api/src/Controller/Hourly/Hourly", {
-        method: "post",
-        body: JSON.stringify(search)
-      }).then(res => {
-        res.json().then(res => {
-          setHourlyData(res)
-        })
-      })
+      // fetch("../../api/src/Controller/Hourly/Hourly", {
+      //   method: "post",
+      //   body: JSON.stringify(search)
+      // }).then(res => {
+      //   res.json().then(res => {
+      //     setHourlyData(res)
+      //   })
+      // })
+
+      hourlyHandler(search).then(res => console.log(res as hourlyDataType))
 
       //Fetching daily data
-      fetch("../../api/src/Controller/Daily/Daily", {
-        method: "post",
-        body: JSON.stringify({search, dailyOption})
-      }).then(res => {
-        res.json().then(res => {
-          setDailyData(res)
-        })
-      })
+      // fetch("../../api/src/Controller/Daily/Daily", {
+      //   method: "post",
+      //   body: JSON.stringify({search, dailyOption})
+      // }).then(res => {
+      //   res.json().then(res => {
+      //     setDailyData(res)
+      //   })
+      // })
+
+      dailyHandler(search, dailyOption).then(res => console.log(res as dailyDataType))
 
       if (dailyData) {
         setDay_night([
