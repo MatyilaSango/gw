@@ -35,6 +35,9 @@ function App() {
 
   useEffect(() => {
     if (reRender) {
+      const controller = new AbortController()
+      const signal = controller.signal
+
       document
         .querySelector(`.${styles["loading-wrapper"]}`)
         ?.classList.remove(`.${styles["loading-wrapper__hide"]}`);
@@ -43,6 +46,7 @@ function App() {
       fetch("../../api/src/Controller/Today/Today", {
         method: "post",
         body: JSON.stringify(search),
+        signal
       }).then((res) => {
         res.json().then((res) => {
           setTodayData(res);
@@ -53,6 +57,7 @@ function App() {
       fetch("../../api/src/Controller/Hourly/Hourly", {
         method: "post",
         body: JSON.stringify(search),
+        signal
       }).then((res) => {
         res.json().then((res) => {
           setHourlyData(res);
@@ -63,6 +68,7 @@ function App() {
       fetch("../../api/src/Controller/Daily/Daily", {
         method: "post",
         body: JSON.stringify({ search, dailyOption }),
+        signal
       }).then((res) => {
         res.json().then((res) => {
           setDailyData(res);
@@ -84,8 +90,12 @@ function App() {
           ?.classList.add(`${styles["loading-wrapper__hide"]}`);
         setreRender(false);
       }
+
+      return ()=>{
+        controller.abort()
+      }
     }
-  }, [dailyData, search, dailyOption, reRender]);
+  }, [dailyData, search]);
 
   const handleSetSearch = (parameter: string): void => {
     setSearch(parameter);
