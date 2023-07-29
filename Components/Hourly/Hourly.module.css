@@ -38,3 +38,6 @@
 .Hourly-Wrapper__type{
     font-size: 15px;
 }
+.Hourly-Wrapper__type-span{
+    text-align: center;
+}

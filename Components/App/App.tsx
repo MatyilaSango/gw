@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./App.module.css";
-import todayStyles from "../Today/Today.module.css"
+import todayStyles from "../Today/Today.module.css";
 import Image from "next/image";
 import loadingGif from "../../Pics/loading-anim.gif";
 import gweatherLogo from "../../Pics/gweather.png";
@@ -17,9 +17,6 @@ import DayNight from "../Daily/DayNight";
 import SunriseSunset from "../Daily/SunriseSunset";
 import TempHistory from "../Daily/TempHistory";
 import Head from "next/head";
-import todayHandler from "@/Scapping/src/Controller/Today/Today";
-import hourlyHandler from "@/Scapping/src/Controller/Hourly/Hourly";
-import dailyHandler from "@/Scapping/src/Controller/Daily/Daily";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -43,46 +40,43 @@ function App() {
         ?.classList.remove(`.${styles["loading-wrapper__hide"]}`);
 
       //Fetching today data
-      // fetch("../../api/src/Controller/Today/Today", {
-      //   method: "post",
-      //   body: JSON.stringify(search)
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setTodayData(res)
-      //   })
-      // })
-
-      todayHandler(search).then(res => console.log(res as todayDataType) )
+      fetch("../../api/src/Controller/Today/Today", {
+        method: "post",
+        body: JSON.stringify(search),
+      }).then((res) => {
+        res.json().then((res) => {
+          setTodayData(res);
+        });
+      });
 
       //Fetching hourly data
-      // fetch("../../api/src/Controller/Hourly/Hourly", {
-      //   method: "post",
-      //   body: JSON.stringify(search)
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setHourlyData(res)
-      //   })
-      // })
-
-      hourlyHandler(search).then(res => console.log(res as hourlyDataType))
+      fetch("../../api/src/Controller/Hourly/Hourly", {
+        method: "post",
+        body: JSON.stringify(search),
+      }).then((res) => {
+        res.json().then((res) => {
+          setHourlyData(res);
+        });
+      });
 
       //Fetching daily data
-
-      // fetch("../../api/src/Controller/Daily/Daily", {
-      //   method: "post",
-      //   body: JSON.stringify({search, dailyOption})
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setDailyData(res)
-      //   })
-      // })
-
-      dailyHandler(search, dailyOption).then(res => console.log(res as dailyDataType))
+      fetch("../../api/src/Controller/Daily/Daily", {
+        method: "post",
+        body: JSON.stringify({ search, dailyOption }),
+      }).then((res) => {
+        res.json().then((res) => {
+          setDailyData(res);
+        });
+      });
 
       if (dailyData) {
-        const tempDN = []
-        dailyData?.data.day_night?.day ? tempDN.push(dailyData?.data.day_night?.day) : 0
-        dailyData?.data.day_night?.night ? tempDN.push(dailyData?.data.day_night?.night) : 0
+        const tempDN = [];
+        dailyData?.data.day_night?.day
+          ? tempDN.push(dailyData?.data.day_night?.day)
+          : 0;
+        dailyData?.data.day_night?.night
+          ? tempDN.push(dailyData?.data.day_night?.night)
+          : 0;
         setDay_night(tempDN);
 
         document
@@ -92,22 +86,6 @@ function App() {
       }
     }
   }, [dailyData, search, dailyOption, reRender]);
-
-  useEffect(() => {
-    setInterval(() => {
-      if (
-        (locTime?.getHours() >= 18 && locTime?.getHours() <= 24) ||
-        (locTime?.getHours() >= 0 && locTime?.getHours() <= 6)
-      ) {
-        setBackgroundPic(wallpaperNight);
-      } else {
-        setBackgroundPic(wallpaper);
-      }
-      if (locTime?.getMinutes() % 10 === 0) {
-        //setreRender(true);
-      }
-    }, 3000);
-  }, [locTime]);
 
   const handleSetSearch = (parameter: string): void => {
     setSearch(parameter);
@@ -123,6 +101,7 @@ function App() {
   return (
     <div className={styles["App"]}>
       <Head>
+        <title>GW | {todayData?.search_parameter}</title>
         <link rel="icon" href="./gweather.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
@@ -134,7 +113,10 @@ function App() {
 
       <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
 
-      <div className={styles["components-container"]} id="components-container ">
+      <div
+        className={styles["components-container"]}
+        id="components-container "
+      >
         <div className={styles["components-container-top"]}>
           {todayData && (
             <Today
@@ -142,6 +124,9 @@ function App() {
               search={todayData?.search_parameter}
               handleSetSearch={handleSetSearch}
               setLocTime={setLocTime}
+              setBackgroundPic={setBackgroundPic}
+              wallpaper={wallpaper}
+              wallpaperNight={wallpaperNight}
             />
           )}
           <div className={styles["components-container-top__hourly"]}>
@@ -162,7 +147,9 @@ function App() {
               <div className={styles["components-container-bottom-nav__text"]}>
                 <span>Daily Weather</span>
               </div>
-              <div className={styles["components-container-bottom-nav__options"]}>
+              <div
+                className={styles["components-container-bottom-nav__options"]}
+              >
                 {/* <Options handleSetDailyOption={handleSetDailyOption} /> */}
               </div>
             </div>
@@ -220,7 +207,6 @@ function App() {
           <Image src={loadingGif} alt="loading" />
         </div>
       </div>
-
     </div>
   );
 }
