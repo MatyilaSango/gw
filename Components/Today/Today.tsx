@@ -10,7 +10,6 @@ interface ITodayProps {
   data: todayType;
   search: String;
   handleSetSearch: (parameter: string) => void;
-  setLocTime: React.Dispatch<React.SetStateAction<Date>>;
   setBackgroundPic: (value: React.SetStateAction<string>) => void;
   wallpaper: string;
   wallpaperNight: string;
@@ -20,7 +19,6 @@ export default function Today({
   data,
   search,
   handleSetSearch,
-  setLocTime,
   setBackgroundPic,
   wallpaper,
   wallpaperNight,
@@ -36,7 +34,6 @@ export default function Today({
       let date = new Date();
       date.setHours(date.getUTCHours() + Number(data.offset));
       setTime((prev) => (prev = date));
-      setLocTime((prev) => (prev = date));
       if (
         (date.getHours() >= 18 && date?.getHours() <= 24) ||
         (date?.getHours() >= 0 && date?.getHours() <= 6)
