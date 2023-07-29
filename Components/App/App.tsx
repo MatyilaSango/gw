@@ -110,6 +110,7 @@ function App() {
   return (
     <div className={styles["App"]}>
       <Head>
+        <title>GW | {todayData?.search_parameter}</title>
         <link rel="icon" href="./gweather.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
