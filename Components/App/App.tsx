@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import styles from "./App.module.css";
-import todayStyles from "../Today/Today.module.css"
+import todayStyles from "../Today/Today.module.css";
 import Image from "next/image";
 import loadingGif from "../../Pics/loading-anim.gif";
 import gweatherLogo from "../../Pics/gweather.png";
@@ -33,14 +33,10 @@ function App() {
   const [reRender, setreRender] = useState<boolean>(true);
   const [dailyOption] = useState<string>("0");
   const [backgroundPic, setBackgroundPic] = useState<string>("");
-  const [locTime, setLocTime] = useState<Date>(new Date());
   //const TEN_MINUTES: number = 600000;
 
   useEffect(() => {
     if (reRender) {
-      document
-        .querySelector(`.${styles["loading-wrapper"]}`)
-        ?.classList.remove(`.${styles["loading-wrapper__hide"]}`);
 
       todayHandler(search).then(res => console.log(res as todayDataType) )
 
@@ -49,34 +45,18 @@ function App() {
       dailyHandler(search, dailyOption).then(res => console.log(res as dailyDataType))
 
       if (dailyData) {
-        const tempDN = []
-        dailyData?.data.day_night?.day ? tempDN.push(dailyData?.data.day_night?.day) : 0
-        dailyData?.data.day_night?.night ? tempDN.push(dailyData?.data.day_night?.night) : 0
+        const tempDN = [];
+        dailyData?.data.day_night?.day
+          ? tempDN.push(dailyData?.data.day_night?.day)
+          : 0;
+        dailyData?.data.day_night?.night
+          ? tempDN.push(dailyData?.data.day_night?.night)
+          : 0;
         setDay_night(tempDN);
-
-        document
-          .querySelector(`.${styles["loading-wrapper"]}`)
-          ?.classList.add(`${styles["loading-wrapper__hide"]}`);
         setreRender(false);
       }
     }
-  }, [dailyData, search, dailyOption, reRender]);
-
-  useEffect(() => {
-    setInterval(() => {
-      if (
-        (locTime?.getHours() >= 18 && locTime?.getHours() <= 24) ||
-        (locTime?.getHours() >= 0 && locTime?.getHours() <= 6)
-      ) {
-        setBackgroundPic(wallpaperNight);
-      } else {
-        setBackgroundPic(wallpaper);
-      }
-      if (locTime?.getMinutes() % 10 === 0) {
-        //setreRender(true);
-      }
-    }, 3000);
-  }, [locTime]);
+  }, [dailyData, search]);
 
   const handleSetSearch = (parameter: string): void => {
     setSearch(parameter);
@@ -92,6 +72,7 @@ function App() {
   return (
     <div className={styles["App"]}>
       <Head>
+        <title>GW | {todayData?.search_parameter}</title>
         <link rel="icon" href="./gweather.png" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <meta name="theme-color" content="#000000" />
@@ -103,14 +84,19 @@ function App() {
 
       <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
 
-      <div className={styles["components-container"]} id="components-container ">
+      <div
+        className={styles["components-container"]}
+        id="components-container "
+      >
         <div className={styles["components-container-top"]}>
           {todayData && (
             <Today
               data={todayData?.data}
               search={todayData?.search_parameter}
               handleSetSearch={handleSetSearch}
-              setLocTime={setLocTime}
+              setBackgroundPic={setBackgroundPic}
+              wallpaper={wallpaper}
+              wallpaperNight={wallpaperNight}
             />
           )}
           <div className={styles["components-container-top__hourly"]}>
@@ -131,7 +117,9 @@ function App() {
               <div className={styles["components-container-bottom-nav__text"]}>
                 <span>Daily Weather</span>
               </div>
-              <div className={styles["components-container-bottom-nav__options"]}>
+              <div
+                className={styles["components-container-bottom-nav__options"]}
+              >
                 {/* <Options handleSetDailyOption={handleSetDailyOption} /> */}
               </div>
             </div>
@@ -184,12 +172,15 @@ function App() {
         )}
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
       </div>
-      <div className={styles["loading-wrapper"]}>
-        <div className={styles["loading-wrapper__gif"]}>
-          <Image src={loadingGif} alt="loading" />
+      {reRender ? (
+        <div className={styles["loading-wrapper"]}>
+          <div className={styles["loading-wrapper__gif"]}>
+            <Image src={loadingGif} alt="loading" />
+          </div>
         </div>
-      </div>
-
+      ) : (
+        ""
+      )}
     </div>
   );
 }
