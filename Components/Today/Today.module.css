@@ -55,6 +55,12 @@
 
 .wrapper-weather-top-det .wrapper-weather-top-det__time {
     width: 100px;
+    height: 100%;
+    position: relative;
+    top: 35px;
+    left: 20px;
+    font-size: 18px;
+    font-weight: 1000;
 }
 
 .wrapper-weather-top-det__loc-type .type,
@@ -171,7 +177,16 @@
     z-index: 100;
     left: 5px;
     box-shadow: 0 1px 0 2px #00000025;
-    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.today-wrapper__input-search__search::-webkit-scrollbar{
+    width: 5px;
+    background-color: transparent;
+}
+.today-wrapper__input-search__search::-webkit-scrollbar-button{
+    background-color: #4726a450;
+  border-radius: 5px;
 }
 
 .removeLocations {
