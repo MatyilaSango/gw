@@ -42,40 +42,9 @@ function App() {
         .querySelector(`.${styles["loading-wrapper"]}`)
         ?.classList.remove(`.${styles["loading-wrapper__hide"]}`);
 
-      //Fetching today data
-      // fetch("../../api/src/Controller/Today/Today", {
-      //   method: "post",
-      //   body: JSON.stringify(search)
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setTodayData(res)
-      //   })
-      // })
-
       todayHandler(search).then(res => console.log(res as todayDataType) )
 
-      //Fetching hourly data
-      // fetch("../../api/src/Controller/Hourly/Hourly", {
-      //   method: "post",
-      //   body: JSON.stringify(search)
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setHourlyData(res)
-      //   })
-      // })
-
       hourlyHandler(search).then(res => console.log(res as hourlyDataType))
-
-      //Fetching daily data
-
-      // fetch("../../api/src/Controller/Daily/Daily", {
-      //   method: "post",
-      //   body: JSON.stringify({search, dailyOption})
-      // }).then(res => {
-      //   res.json().then(res => {
-      //     setDailyData(res)
-      //   })
-      // })
 
       dailyHandler(search, dailyOption).then(res => console.log(res as dailyDataType))
 
