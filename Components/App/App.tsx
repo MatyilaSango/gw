@@ -30,23 +30,18 @@ function App() {
   const [reRender, setreRender] = useState<boolean>(true);
   const [dailyOption] = useState<string>("0");
   const [backgroundPic, setBackgroundPic] = useState<string>("");
-  const [locTime, setLocTime] = useState<Date>(new Date());
   //const TEN_MINUTES: number = 600000;
 
   useEffect(() => {
     if (reRender) {
-      const controller = new AbortController()
-      const signal = controller.signal
-
-      document
-        .querySelector(`.${styles["loading-wrapper"]}`)
-        ?.classList.remove(`.${styles["loading-wrapper__hide"]}`);
+      const controller = new AbortController();
+      const signal = controller.signal;
 
       //Fetching today data
       fetch("../../api/src/Controller/Today/Today", {
         method: "post",
         body: JSON.stringify(search),
-        signal
+        signal,
       }).then((res) => {
         res.json().then((res) => {
           setTodayData(res);
@@ -57,7 +52,7 @@ function App() {
       fetch("../../api/src/Controller/Hourly/Hourly", {
         method: "post",
         body: JSON.stringify(search),
-        signal
+        signal,
       }).then((res) => {
         res.json().then((res) => {
           setHourlyData(res);
@@ -68,7 +63,7 @@ function App() {
       fetch("../../api/src/Controller/Daily/Daily", {
         method: "post",
         body: JSON.stringify({ search, dailyOption }),
-        signal
+        signal,
       }).then((res) => {
         res.json().then((res) => {
           setDailyData(res);
@@ -84,16 +79,12 @@ function App() {
           ? tempDN.push(dailyData?.data.day_night?.night)
           : 0;
         setDay_night(tempDN);
-
-        document
-          .querySelector(`.${styles["loading-wrapper"]}`)
-          ?.classList.add(`${styles["loading-wrapper__hide"]}`);
         setreRender(false);
       }
 
-      return ()=>{
-        controller.abort()
-      }
+      return () => {
+        controller.abort();
+      };
     }
   }, [dailyData, search]);
 
@@ -133,7 +124,6 @@ function App() {
               data={todayData?.data}
               search={todayData?.search_parameter}
               handleSetSearch={handleSetSearch}
-              setLocTime={setLocTime}
               setBackgroundPic={setBackgroundPic}
               wallpaper={wallpaper}
               wallpaperNight={wallpaperNight}
@@ -212,11 +202,15 @@ function App() {
         )}
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
       </div>
-      <div className={styles["loading-wrapper"]}>
-        <div className={styles["loading-wrapper__gif"]}>
-          <Image src={loadingGif} alt="loading" />
+      {reRender ? (
+        <div className={styles["loading-wrapper"]}>
+          <div className={styles["loading-wrapper__gif"]}>
+            <Image src={loadingGif} alt="loading" />
+          </div>
         </div>
-      </div>
+      ) : (
+        ""
+      )}
     </div>
   );
 }
