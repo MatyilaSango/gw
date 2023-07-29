@@ -11,6 +11,9 @@ interface ITodayProps {
   search: String;
   handleSetSearch: (parameter: string) => void;
   setLocTime: React.Dispatch<React.SetStateAction<Date>>;
+  setBackgroundPic: (value: React.SetStateAction<string>) => void;
+  wallpaper: string;
+  wallpaperNight: string;
 }
 
 export default function Today({
@@ -18,6 +21,9 @@ export default function Today({
   search,
   handleSetSearch,
   setLocTime,
+  setBackgroundPic,
+  wallpaper,
+  wallpaperNight,
 }: ITodayProps) {
   const [locations, setLocations] = useState<locationsType>();
 
@@ -31,6 +37,14 @@ export default function Today({
       date.setHours(date.getUTCHours() + Number(data.offset));
       setTime((prev) => (prev = date));
       setLocTime((prev) => (prev = date));
+      if (
+        (date.getHours() >= 18 && date?.getHours() <= 24) ||
+        (date?.getHours() >= 0 && date?.getHours() <= 6)
+      ) {
+        setBackgroundPic((prev) => (prev = wallpaperNight));
+      } else {
+        setBackgroundPic((prev) => (prev = wallpaper));
+      }
     }, 1000);
 
     return () => {
