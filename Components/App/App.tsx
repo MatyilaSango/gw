@@ -89,12 +89,9 @@ function App() {
         (locTime?.getHours() >= 18 && locTime?.getHours() <= 24) ||
         (locTime?.getHours() >= 0 && locTime?.getHours() <= 6)
       ) {
-        setBackgroundPic(wallpaperNight);
+        setBackgroundPic(prev => prev = wallpaperNight);
       } else {
-        setBackgroundPic(wallpaper);
-      }
-      if (locTime?.getMinutes() % 10 === 0) {
-        //setreRender(true);
+        setBackgroundPic(prev => prev = wallpaper);
       }
     }, 3000);
   }, [locTime]);
