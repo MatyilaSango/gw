@@ -2,6 +2,12 @@ import type { NextApiRequest, NextApiResponse } from "next";
 import { getSearchOption } from "../../Addon/Search/Search";
 import { locationObj, todayObj } from "../../Addon/Objects/Objects";
 
+export const config = {
+  api: {
+    externalResolver: true,
+  },
+}
+
 export default function handler(
   request: NextApiRequest,
   response: NextApiResponse
