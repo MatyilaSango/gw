@@ -4,7 +4,7 @@ import styles from "./Today.module.css";
 import appStyles from "../App/App.module.css";
 import SearchOption from "../SearchOptions/SearchOption";
 import Image from "next/image";
-import { Locations } from "@/pages/api/src/Service/Locations/Locations";
+import { Locations } from "../../Scapping/src/Service/Locations/Locations";
 
 interface ITodayProps {
   data: todayType;
@@ -133,7 +133,7 @@ export default function Today({
               </div>
             </div>
             <div className={styles["wrapper-weather-bottom-det__pic"]}>
-              <Image width={100} height={100} src={data.icon} alt="pic" />
+              <Image src={data.icon} alt="pic" />
             </div>
           </div>
         </div>
