@@ -4,7 +4,7 @@ import styles from "./App.module.css";
 import todayStyles from "../Today/Today.module.css";
 import Image from "next/image";
 import loadingGif from "../../Pics/loading-anim.gif";
-import gweatherLogo from "../../Pics/gweather.png";
+import gweatherLogo from "../../Pics/GW-weather.png";
 import Today from "../Today/Today";
 import {
   dailyDataType,
@@ -57,6 +57,8 @@ function App() {
         setDay_night(tempDN);
         setreRender(false);
       }
+
+      document.title = "GW-Weather | "+search;
     }
   }, [dailyData, search]);
 
