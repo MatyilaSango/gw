@@ -179,7 +179,7 @@ function App() {
       {reRender ? (
         <div className={styles["loading-wrapper"]}>
           <div className={styles["loading-wrapper__gif"]}>
-            <Image src={loadingGif} alt="loading" />
+            <Image src={loadingGif} alt="loading" width={100} height={100}/>
           </div>
         </div>
       ) : (
