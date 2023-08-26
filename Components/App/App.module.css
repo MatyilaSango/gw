@@ -8,6 +8,7 @@
 .App-img {
   height: auto;
   width: 100%;
+  min-width: 1000px;
 }
 
 .components-container {
@@ -132,6 +133,8 @@
   width: 180px;
   position: absolute;
   top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
   border-radius: 10px;
 }
 
@@ -140,7 +143,6 @@
     flex-direction: column;
     justify-content: center;
     height: 600px;
-
   }
 
   .components-container-top .components-container-top__hourly {
