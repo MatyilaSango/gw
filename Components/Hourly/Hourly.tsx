@@ -11,7 +11,7 @@ export default function Hourly({hour, icon, temp, type}: hourlydataType | any) {
         <span>{hour}</span>
       </div>
       <div className={styles['Hourly-Wrapper__icon_type']}>
-        <Image src={icon} width={100} height={100} className={styles["Hourly-Wrapper__icon_type__img"]} alt="pic" />
+        <Image src={icon} className={styles["Hourly-Wrapper__icon_type__img"]} alt="pic" />
         <div className={styles["Hourly-Wrapper__type"]}>
           <span className={styles["Hourly-Wrapper__type-span"]}>{type}</span>
         </div>
