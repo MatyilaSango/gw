@@ -26,7 +26,7 @@
     align-items: center;
 }
 .Hourly-Wrapper span{
-    text-shadow: 0px 12px 2px #000000;
+    text-shadow: 0px 6px 2px #000000;
 }
 .Hourly-Wrapper__icon_type{
     flex-flow: row wrap;
@@ -34,6 +34,8 @@
 .Hourly-Wrapper__icon_type__img{
     height: 50%;
     width: auto;
+    -webkit-filter: drop-shadow(0px 6px 2px #000000);
+    filter: drop-shadow(0px 6px 2px #000000);
 }
 .Hourly-Wrapper__type{
     font-size: 15px;
