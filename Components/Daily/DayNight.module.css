@@ -24,3 +24,7 @@
     align-items: center;
     text-shadow: 0px 5px 7px #000000;
 }
+.day-night-wrapper__top--icon_day img{
+    -webkit-filter: drop-shadow(0px 6px 2px #000000);
+    filter: drop-shadow(0px 6px 2px #000000);
+}

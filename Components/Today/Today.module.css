@@ -38,7 +38,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    overflow: hidden;
 }
 
 .wrapper-weather-top-det__loc-type {
@@ -57,7 +56,7 @@
     width: 100px;
     height: 100%;
     position: relative;
-    top: 35px;
+    top: 10px;
     left: 20px;
     font-size: 18px;
     font-weight: 1000;
@@ -68,6 +67,10 @@
 .wrapper-weather-bottom-det__det .air-quality {
     font-size: 16px;
     padding-left: 5px;
+}
+
+.wrapper-weather-top-det__loc-type .type{
+    font-size: 18px;
 }
 
 .wrapper-weather-bottom-det {
@@ -102,14 +105,17 @@
     position: relative;
     left: 20px;
     top: 10px;
+    -webkit-filter: drop-shadow(0px 6px 2px #000000);
+    filter: drop-shadow(0px 6px 2px #000000);
 }
 
 .today-wrapper span {
-    text-shadow: 0px 12px 2px #000000;
+    text-shadow: 0px 6px 2px #000000;
 }
 
 .loc {
     overflow: hidden;
+    height: 40px;
 }
 
 .loc-text {
@@ -125,6 +131,8 @@
     -moz-animation: my-animation 15s linear infinite;
     -webkit-animation: my-animation 15s linear infinite;
     animation: my-animation 15s linear infinite;
+
+    text-shadow: 0px 6px 2px #000000;
 }
 
 /* for Firefox */
