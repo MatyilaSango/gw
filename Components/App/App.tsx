@@ -5,6 +5,7 @@ import todayStyles from "../Today/Today.module.css";
 import Image from "next/image";
 import loadingGif from "../../Pics/loading-anim.gif";
 import gweatherLogo from "../../Pics/GW-weather.png";
+import leftRightArrow from "../../Pics/back-right-arrow.svg"
 import Today from "../Today/Today";
 import {
   dailyDataType,
@@ -21,7 +22,6 @@ import Head from "next/head";
 import dailyHandler from "../../Scapping/src/Controller/Daily/Daily";
 import hourlyHandler from "../../Scapping/src/Controller/Hourly/Hourly";
 import todayHandler from "../../Scapping/src/Controller/Today/Today";
-
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -40,7 +40,7 @@ function App() {
   useEffect(() => {
     if (reRender) {
 
-      todayHandler(search).then(res => setTodayData(res as todayDataType) )
+      todayHandler(search).then(res => setTodayData(res as todayDataType))
 
       hourlyHandler(search).then(res => setHourlyData(res as hourlyDataType))
 
@@ -58,7 +58,7 @@ function App() {
         setreRender(false);
       }
 
-      document.title = "GW-Weather | "+search;
+      document.title = "GW-Weather | " + search;
     }
   }, [dailyData, search]);
 
@@ -70,6 +70,19 @@ function App() {
       .querySelector(`.${todayStyles["today-wrapper__input-search__search"]}`)
       ?.classList.add(`${todayStyles["removeLocations"]}`);
   };
+
+  const handleHourlySideScroll = (direction: string) => {
+    const hourlyContainer: HTMLDivElement = document.getElementById("components-container-top__hourly") as HTMLDivElement
+    switch (direction) {
+      case "left":
+        hourlyContainer.scrollLeft -= 170
+        break;
+
+      case "right":
+        hourlyContainer.scrollLeft += 170
+        break;
+    }
+  }
 
   //const handleSetDailyOption = (parameter: String): void => {};
 
@@ -103,16 +116,24 @@ function App() {
               wallpaperNight={wallpaperNight}
             />
           )}
-          <div className={styles["components-container-top__hourly"]}>
-            {hourlyData?.data.map((data_, i) => (
-              <Hourly
-                key={i}
-                hour={data_.hour}
-                icon={data_.icon}
-                temp={data_.temp}
-                type={data_.type}
-              />
-            ))}
+          <div className={styles["components-container-top__hourly"]} >
+            <div className={styles["components-container-top__hourly--left_arrow"]}>
+              <Image className={styles["components-container-top__hourly--left_arrow--img"]} id="components-container-top__hourly--left_arrow--img" src={leftRightArrow} alt='left-arrow' onClick={() => handleHourlySideScroll("left")} />
+            </div>
+            <div className={styles["components-container-top__hourly--data-view"]} id="components-container-top__hourly">
+              {hourlyData?.data.map((data_, i) => (
+                <Hourly
+                  key={i}
+                  hour={data_.hour}
+                  icon={data_.icon}
+                  temp={data_.temp}
+                  type={data_.type}
+                />
+              ))}
+            </div>
+            <div className={styles["components-container-top__hourly--right_arrow"]}>
+              <Image className={styles["components-container-top__hourly--right_arrow--img"]} id="components-container-top__hourly--right_arrow--img" src={leftRightArrow} alt='right-arrow' onClick={() => handleHourlySideScroll("right")} />
+            </div>
           </div>
         </div>
         {dailyData ? (
@@ -179,7 +200,7 @@ function App() {
       {reRender ? (
         <div className={styles["loading-wrapper"]}>
           <div className={styles["loading-wrapper__gif"]}>
-            <Image src={loadingGif} alt="loading" width={100} height={100}/>
+            <Image src={loadingGif} alt="loading" width={100} height={100} />
           </div>
         </div>
       ) : (
