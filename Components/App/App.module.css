@@ -187,4 +187,13 @@
     height: 300px;
     margin-bottom: 20px;
   }
+  
+  .components-container-bottom-nav__text{
+    width: 150px;
+    font-size: 18px;
+  }
+
+  .components-container-bottom-nav__options{
+    width: calc(100% - 180px);
+  }
 }

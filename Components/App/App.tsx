@@ -1,11 +1,11 @@
-'use client'
+"use client";
 import React, { useEffect, useState } from "react";
 import styles from "./App.module.css";
 import todayStyles from "../Today/Today.module.css";
 import Image from "next/image";
 import loadingGif from "../../Pics/loading-anim.gif";
 import gweatherLogo from "../../Pics/GW-weather.png";
-import leftRightArrow from "../../Pics/back-right-arrow.svg"
+import leftRightArrow from "../../Pics/back-right-arrow.svg";
 import Today from "../Today/Today";
 import {
   dailyDataType,
@@ -14,7 +14,7 @@ import {
   todayDataType,
 } from "../../Types/types";
 import Hourly from "../Hourly/Hourly";
-//import Options from "../Options/Options";
+import Options from "../Options/Options";
 import DayNight from "../Daily/DayNight";
 import SunriseSunset from "../Daily/SunriseSunset";
 import TempHistory from "../Daily/TempHistory";
@@ -33,18 +33,19 @@ function App() {
   const [dailyData, setDailyData] = useState<dailyDataType>();
   const [day_night, setDay_night] = useState<dataType[] | any[]>([]);
   const [reRender, setreRender] = useState<boolean>(true);
-  const [dailyOption] = useState<string>("0");
+  const [dailyOption, setDailyOption] = useState<string>("0");
   const [backgroundPic, setBackgroundPic] = useState<string>("");
   //const TEN_MINUTES: number = 600000;
 
   useEffect(() => {
     if (reRender) {
+      todayHandler(search).then((res) => setTodayData(res as todayDataType));
 
-      todayHandler(search).then(res => setTodayData(res as todayDataType))
+      hourlyHandler(search).then((res) => setHourlyData(res as hourlyDataType));
 
-      hourlyHandler(search).then(res => setHourlyData(res as hourlyDataType))
-
-      dailyHandler(search, dailyOption).then(res => setDailyData(res as dailyDataType))
+      dailyHandler(search, dailyOption).then((res) =>
+        setDailyData(res as dailyDataType)
+      );
 
       if (dailyData) {
         const tempDN = [];
@@ -72,19 +73,25 @@ function App() {
   };
 
   const handleHourlySideScroll = (direction: string) => {
-    const hourlyContainer: HTMLDivElement = document.getElementById("components-container-top__hourly") as HTMLDivElement
+    const hourlyContainer: HTMLDivElement = document.getElementById(
+      "components-container-top__hourly"
+    ) as HTMLDivElement;
     switch (direction) {
       case "left":
-        hourlyContainer.scrollLeft -= 170
+        hourlyContainer.scrollLeft -= 170;
         break;
 
       case "right":
-        hourlyContainer.scrollLeft += 170
+        hourlyContainer.scrollLeft += 170;
         break;
     }
-  }
+  };
 
-  //const handleSetDailyOption = (parameter: String): void => {};
+  const handleSetDailyOption = (parameter: string): void => {
+    setDailyOption((prev) => (prev = parameter));
+    setreRender((prev) => (prev = true));
+    setDailyData((prev) => (prev = undefined));
+  };
 
   return (
     <div className={styles["App"]}>
@@ -116,11 +123,24 @@ function App() {
               wallpaperNight={wallpaperNight}
             />
           )}
-          <div className={styles["components-container-top__hourly"]} >
-            <div className={styles["components-container-top__hourly--left_arrow"]}>
-              <Image className={styles["components-container-top__hourly--left_arrow--img"]} id="components-container-top__hourly--left_arrow--img" src={leftRightArrow} alt='left-arrow' onClick={() => handleHourlySideScroll("left")} />
+          <div className={styles["components-container-top__hourly"]}>
+            <div
+              className={styles["components-container-top__hourly--left_arrow"]}
+            >
+              <Image
+                className={
+                  styles["components-container-top__hourly--left_arrow--img"]
+                }
+                id="components-container-top__hourly--left_arrow--img"
+                src={leftRightArrow}
+                alt="left-arrow"
+                onClick={() => handleHourlySideScroll("left")}
+              />
             </div>
-            <div className={styles["components-container-top__hourly--data-view"]} id="components-container-top__hourly">
+            <div
+              className={styles["components-container-top__hourly--data-view"]}
+              id="components-container-top__hourly"
+            >
               {hourlyData?.data.map((data_, i) => (
                 <Hourly
                   key={i}
@@ -131,8 +151,20 @@ function App() {
                 />
               ))}
             </div>
-            <div className={styles["components-container-top__hourly--right_arrow"]}>
-              <Image className={styles["components-container-top__hourly--right_arrow--img"]} id="components-container-top__hourly--right_arrow--img" src={leftRightArrow} alt='right-arrow' onClick={() => handleHourlySideScroll("right")} />
+            <div
+              className={
+                styles["components-container-top__hourly--right_arrow"]
+              }
+            >
+              <Image
+                className={
+                  styles["components-container-top__hourly--right_arrow--img"]
+                }
+                id="components-container-top__hourly--right_arrow--img"
+                src={leftRightArrow}
+                alt="right-arrow"
+                onClick={() => handleHourlySideScroll("right")}
+              />
             </div>
           </div>
         </div>
@@ -145,7 +177,10 @@ function App() {
               <div
                 className={styles["components-container-bottom-nav__options"]}
               >
-                {/* <Options handleSetDailyOption={handleSetDailyOption} /> */}
+                <Options
+                  handleSetDailyOption={handleSetDailyOption}
+                  offsetHours={Number(todayData?.data.offset)}
+                />
               </div>
             </div>
             <div className={styles["components-container-bottom-dnsstal"]}>
