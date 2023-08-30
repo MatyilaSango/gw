@@ -22,6 +22,7 @@ import Head from "next/head";
 import dailyHandler from "../../Scapping/src/Controller/Daily/Daily";
 import hourlyHandler from "../../Scapping/src/Controller/Hourly/Hourly";
 import todayHandler from "../../Scapping/src/Controller/Today/Today";
+import Options from "../Options/Options";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -84,7 +85,9 @@ function App() {
     }
   }
 
-  //const handleSetDailyOption = (parameter: String): void => {};
+  const handleSetDailyOption = (parameter: String): void => {
+    console.log(parameter)
+  };
 
   return (
     <div className={styles["App"]}>
@@ -145,7 +148,7 @@ function App() {
               <div
                 className={styles["components-container-bottom-nav__options"]}
               >
-                {/* <Options handleSetDailyOption={handleSetDailyOption} /> */}
+                <Options handleSetDailyOption={handleSetDailyOption} />
               </div>
             </div>
             <div className={styles["components-container-bottom-dnsstal"]}>

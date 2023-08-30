@@ -1,5 +1,5 @@
 import React, { MouseEvent } from 'react'
-import "./Options.module.css"
+import styles from "./Options.module.css"
 
 interface IhandleSetDailyOption {
     handleSetDailyOption: (parameter: String) => void
@@ -14,7 +14,7 @@ export default function Options({ handleSetDailyOption }:  IhandleSetDailyOption
     }
 
     return (
-    <div className='Options-wrapper'>
+    <div className={styles['Options-wrapper']}>
         {arrayKeys.map(key_ => (
             <span key={key_} onClick={handleOptionChange}>
                 {key_}

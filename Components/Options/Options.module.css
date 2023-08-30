@@ -7,13 +7,17 @@
     display: flex;
     overflow-x: scroll;
 }
+.Options-wrapper::-webkit-scrollbar{
+    display: none;
+}
 .Options-wrapper span{
     height: 100%;
-    width: 60px;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    margin-right: 15px;
 }
 .Options-wrapper span:hover{
     color: #000000;
