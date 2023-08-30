@@ -194,6 +194,6 @@
   }
 
   .components-container-bottom-nav__options{
-    width: calc(100% - 150px);
+    width: calc(100% - 180px);
   }
 }
