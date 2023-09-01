@@ -69,7 +69,7 @@
     padding-left: 5px;
 }
 
-.wrapper-weather-top-det__loc-type .type{
+.wrapper-weather-top-det__loc-type .type {
     font-size: 18px;
 }
 
@@ -188,13 +188,14 @@
     overflow-y: scroll;
 }
 
-.today-wrapper__input-search__search::-webkit-scrollbar{
+.today-wrapper__input-search__search::-webkit-scrollbar {
     width: 5px;
     background-color: transparent;
 }
-.today-wrapper__input-search__search::-webkit-scrollbar-button{
+
+.today-wrapper__input-search__search::-webkit-scrollbar-button {
     background-color: #4726a450;
-  border-radius: 5px;
+    border-radius: 5px;
 }
 
 .removeLocations {

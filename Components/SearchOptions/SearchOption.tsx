@@ -6,7 +6,7 @@ interface IsearchOption {
   handleSetSearch: (parameter: string) => void
 }
 
-export default function SearchOption({location, handleSetSearch}: IsearchOption) {
+export default function SearchOption({ location, handleSetSearch }: IsearchOption) {
 
   const handleOptionClick = (e: MouseEvent<HTMLParagraphElement>): void => {
     handleSetSearch(String(e.currentTarget.lastChild?.nodeValue))
@@ -14,7 +14,7 @@ export default function SearchOption({location, handleSetSearch}: IsearchOption)
 
   return (
     <div className={styles['search-option-wrapper']}>
-        <p onClick={handleOptionClick}>{location}</p>
+      <p onClick={handleOptionClick}>{location}</p>
     </div>
   )
 }

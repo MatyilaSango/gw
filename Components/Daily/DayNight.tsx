@@ -38,7 +38,7 @@ export default function DayNight(
       <Table
         temp={temp}
         real_feel={real_feel}
-        real_feel_shade={real_feel_shade==="undefined" ? "" : real_feel_shade}
+        real_feel_shade={real_feel_shade === "undefined" ? "" : real_feel_shade}
         phrase={phrase}
         max_uv_index={max_uv_index}
         wind={wind}

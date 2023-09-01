@@ -1,30 +1,34 @@
-.day-night-wrapper{
+.day-night-wrapper {
     height: fit-content;
     width: 450px;
     background-color: #FFFDFD50;
     padding: 10px;
-    margin:0 20px 20px 0;
+    margin: 0 20px 20px 0;
     color: black;
 }
-.day-night-wrapper__top{
+
+.day-night-wrapper__top {
     height: 50px;
     font-size: 22px;
     display: flex;
     justify-content: space-between;
     font-weight: 500;
 }
-.day-night-wrapper__top--icon_day img{
+
+.day-night-wrapper__top--icon_day img {
     width: 40px;
 }
+
 .day-night-wrapper__top--icon_day,
-.day-night-wrapper__top--date{
+.day-night-wrapper__top--date {
     width: fit-content;
     height: 100%;
     display: flex;
     align-items: center;
     text-shadow: 0px 5px 7px #000000;
 }
-.day-night-wrapper__top--icon_day img{
+
+.day-night-wrapper__top--icon_day img {
     -webkit-filter: drop-shadow(0px 6px 2px #000000);
     filter: drop-shadow(0px 6px 2px #000000);
 }

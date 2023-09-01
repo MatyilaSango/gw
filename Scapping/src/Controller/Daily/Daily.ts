@@ -1,7 +1,10 @@
 import { dailyObj } from "../../Addon/Objects/Objects";
 import { getSearchOption } from "../../Addon/Search/Search";
 
-export default async function dailyHandler(search: string, dailyOption: string){
+export default async function dailyHandler(
+  search: string,
+  dailyOption: string
+) {
   const location_query: string = search;
   const day_query: string = dailyOption;
 

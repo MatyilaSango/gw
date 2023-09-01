@@ -148,10 +148,8 @@
   filter: drop-shadow(0px 6px 2px #000000);
 }
 
-.components-container-top__hourly:hover > 
-.components-container-top__hourly--left_arrow,
-.components-container-top__hourly:hover > 
-.components-container-top__hourly--right_arrow {
+.components-container-top__hourly:hover>.components-container-top__hourly--left_arrow,
+.components-container-top__hourly:hover>.components-container-top__hourly--right_arrow {
   display: flex;
 }
 

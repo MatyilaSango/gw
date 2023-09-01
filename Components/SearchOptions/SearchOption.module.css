@@ -1,4 +1,4 @@
-.search-option-wrapper{
+.search-option-wrapper {
     min-height: 25px;
     background-color: rgba(255, 255, 255, 0.2);
     margin: 3px 0;
@@ -9,6 +9,7 @@
     display: flex;
     align-items: center;
 }
-.search-option-wrapper:hover{
+
+.search-option-wrapper:hover {
     background-color: rgba(255, 255, 255, 0.8);
 }
