@@ -1,10 +1,11 @@
-.sunrise-sunset-wrapper-card{
+.sunrise-sunset-wrapper-card {
     width: 300px;
     background-color: #FFFDFD50;
     margin-bottom: 40px;
     color: black;
 }
-.sunrise-sunset-wrapper-card_title{
+
+.sunrise-sunset-wrapper-card_title {
     height: 50px;
     display: flex;
     align-items: center;

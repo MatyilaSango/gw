@@ -1,4 +1,4 @@
-.Options-wrapper{
+.Options-wrapper {
     font-size: 23px;
     text-shadow: 0px 8px 2px #00000070;
     height: 100%;
@@ -7,10 +7,12 @@
     display: flex;
     overflow-x: scroll;
 }
-.Options-wrapper::-webkit-scrollbar{
+
+.Options-wrapper::-webkit-scrollbar {
     display: none;
 }
-.Options-wrapper span{
+
+.Options-wrapper span {
     height: 100%;
     width: auto;
     display: flex;
@@ -19,6 +21,7 @@
     cursor: pointer;
     margin-right: 15px;
 }
-.Options-wrapper span:hover{
+
+.Options-wrapper span:hover {
     color: #000000;
 }

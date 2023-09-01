@@ -94,12 +94,12 @@ export default function Today({
         <div className={styles["today-wrapper__input-search__search"]}>
           {locations
             ? locations?.available_locations.map((location, i) => (
-                <SearchOption
-                  key={i}
-                  location={String(location)}
-                  handleSetSearch={handleSetSearch}
-                />
-              ))
+              <SearchOption
+                key={i}
+                location={String(location)}
+                handleSetSearch={handleSetSearch}
+              />
+            ))
             : ""}
         </div>
       </div>

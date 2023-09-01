@@ -1,4 +1,4 @@
-.Hourly-Wrapper{
+.Hourly-Wrapper {
     height: 100%;
     width: 150px;
     min-width: 150px;
@@ -8,38 +8,46 @@
     color: white;
     margin: 0 10px;
 }
+
 .Hourly-Wrapper__time,
-.Hourly-Wrapper__temp{
+.Hourly-Wrapper__temp {
     height: 20%;
     font-size: 20px;
     font-weight: 600;
 }
-.Hourly-Wrapper__icon_type{
+
+.Hourly-Wrapper__icon_type {
     height: 60%;
 }
+
 .Hourly-Wrapper__time,
 .Hourly-Wrapper__icon_type,
 .Hourly-Wrapper__temp,
-.Hourly-Wrapper__type{
+.Hourly-Wrapper__type {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-.Hourly-Wrapper span{
+
+.Hourly-Wrapper span {
     text-shadow: 0px 6px 2px #000000;
 }
-.Hourly-Wrapper__icon_type{
+
+.Hourly-Wrapper__icon_type {
     flex-flow: row wrap;
 }
-.Hourly-Wrapper__icon_type__img{
+
+.Hourly-Wrapper__icon_type__img {
     height: 50%;
     width: auto;
     -webkit-filter: drop-shadow(0px 6px 2px #000000);
     filter: drop-shadow(0px 6px 2px #000000);
 }
-.Hourly-Wrapper__type{
+
+.Hourly-Wrapper__type {
     font-size: 15px;
 }
-.Hourly-Wrapper__type-span{
+
+.Hourly-Wrapper__type-span {
     text-align: center;
 }
