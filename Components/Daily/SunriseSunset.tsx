@@ -1,6 +1,6 @@
 import React from "react";
 import styles from "./SunriseSunset.module.css";
-import SunriseSunsetTable from "./Table/SunriseSunsetTable";
+import SunriseSunsetTable from "../Table/SunriseSunsetTable";
 
 interface props {
   title: string;

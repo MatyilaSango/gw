@@ -1,6 +1,6 @@
 import React from "react";
 import { temperature_historyType } from "../../Types/types";
-import TempHistoryTable from "./Table/TempHistorytable";
+import TempHistoryTable from "../Table/TempHistorytable";
 import styles from "./TempHistory.module.css"
 
 export default function TempHistory({

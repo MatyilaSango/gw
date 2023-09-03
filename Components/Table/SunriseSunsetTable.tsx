@@ -1,5 +1,5 @@
 import React from "react";
-import { sunriseSunsetType } from "../../../Types/types";
+import { sunriseSunsetType } from "../../Types/types";
 import styles from "./SunriseSunsetTable.module.css";
 
 export default function SunriseSunsetTable({
