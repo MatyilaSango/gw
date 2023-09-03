@@ -3,7 +3,7 @@ import styles from "./DayNight.module.css";
 import {
   dataType,
 } from "../../Types/types";
-import Table from "./Table/Table";
+import Table from "../Table/Table";
 
 export default function DayNight(
   {

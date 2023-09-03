@@ -133,7 +133,7 @@ export default function Today({
               </div>
             </div>
             <div className={styles["wrapper-weather-bottom-det__pic"]}>
-              <Image src={data.icon} alt="pic" />
+              <img src={data.icon} alt="pic" />
             </div>
           </div>
         </div>

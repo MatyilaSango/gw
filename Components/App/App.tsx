@@ -11,6 +11,7 @@ import {
   dailyDataType,
   dataType,
   hourlyDataType,
+  hourlydataType,
   todayDataType,
 } from "../../Types/types";
 import Hourly from "../Hourly/Hourly";
@@ -22,6 +23,7 @@ import Head from "next/head";
 import dailyHandler from "../../Scapping/src/Controller/Daily/Daily";
 import hourlyHandler from "../../Scapping/src/Controller/Hourly/Hourly";
 import todayHandler from "../../Scapping/src/Controller/Today/Today";
+import HourlyFullView from "../Hourly/HourlyFullView";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -35,6 +37,8 @@ function App() {
   const [reRender, setreRender] = useState<boolean>(true);
   const [dailyOption, setDailyOption] = useState<string>("0");
   const [backgroundPic, setBackgroundPic] = useState<string>("");
+  const [showHourlyFullView, setShowHourlyFullView] = useState<boolean>(false);
+  const [hourlyFullViewdata, setHourlyFullViewdata] = useState<hourlydataType>();
   //const TEN_MINUTES: number = 600000;
 
   useEffect(() => {
@@ -93,6 +97,10 @@ function App() {
     setDailyData((prev) => (prev = undefined));
   };
 
+  const handleHourlyFullView = (id: number) => {
+    setHourlyFullViewdata(prev => (prev = hourlyData?.data[id]));
+  };
+
   return (
     <div className={styles["App"]}>
       <Head>
@@ -144,10 +152,13 @@ function App() {
               {hourlyData?.data.map((data_, i) => (
                 <Hourly
                   key={i}
+                  id={i}
                   hour={data_.hour}
                   icon={data_.icon}
                   temp={data_.temp}
                   type={data_.type}
+                  setShowHourlyFullView={setShowHourlyFullView}
+                  handleHourlyFullView={handleHourlyFullView}
                 />
               ))}
             </div>
@@ -238,6 +249,15 @@ function App() {
             <Image src={loadingGif} alt="loading" width={100} height={100} />
           </div>
         </div>
+      ) : (
+        ""
+      )}
+
+      {(showHourlyFullView && hourlyFullViewdata) ? (
+        <HourlyFullView
+          hourlyFullViewdata={hourlyFullViewdata as hourlydataType}
+          setShowHourlyFullView={setShowHourlyFullView}
+        />
       ) : (
         ""
       )}

@@ -1,5 +1,5 @@
 import React from "react";
-import { dataType } from "../../../Types/types";
+import { dataType } from "../../Types/types";
 import styles from "./Table.module.css";
 
 export default function Table({
