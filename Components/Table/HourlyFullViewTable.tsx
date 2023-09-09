@@ -4,28 +4,32 @@ import styles from "./Table.module.css";
 import hourlyStyles from "./HourlyFullViewTable.module.css"
 
 export default function Table({
-    hour,
-    temp,
-    precip,
-    type,
-    real_feel,
-    real_feel_shade,
-    max_uv_index,
-    wind,
-    wind_gusts,
-    humidity,
-    indoor_humidity,
-    dew_point,
-    air_quality,
-    cloudy_cover,
-    visibility,
-    cloud_ceiling,
-    icon
+  hour,
+  temp,
+  precip,
+  type,
+  real_feel,
+  real_feel_shade,
+  max_uv_index,
+  wind,
+  wind_gusts,
+  humidity,
+  indoor_humidity,
+  dew_point,
+  air_quality,
+  cloudy_cover,
+  visibility,
+  cloud_ceiling,
+  icon
 }: hourlydataType | any) {
 
   return <div className={styles["table-wrapper"]}>
     <table>
       <tbody>
+        <tr>
+          <td>Type</td>
+          <td>{type}</td>
+        </tr>
         <tr>
           <td>Tempereture</td>
           <td>{temp}</td>
