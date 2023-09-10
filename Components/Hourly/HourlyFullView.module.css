@@ -1,4 +1,4 @@
-.HourlyFullView-wrapper{
+.HourlyFullView-wrapper {
     position: absolute;
     left: 0;
     top: 0;
@@ -10,28 +10,29 @@
     align-items: center;
 }
 
-.HourlyFullView-wrapper__data-view-con{
+.HourlyFullView-wrapper__data-view-con {
     width: 400px;
     background-color: #8B7CA4;
     box-shadow: 0px 0px 10px #00000050;
     position: relative;
     padding: 5px;
 }
-.HourlyFullView-wrapper__data-view-con .table-wrapper{
+
+.HourlyFullView-wrapper__data-view-con .table-wrapper {
     border-radius: 10px
 }
 
-.HourlyFullView-wrapper__data-view-con__pic-time-exit__pic{
+.HourlyFullView-wrapper__data-view-con__pic-time-exit__pic {
     filter: drop-shadow(0px 6px 2px #000000);
 }
 
-.HourlyFullView-wrapper__data-view-con__pic-time-exit__time{
+.HourlyFullView-wrapper__data-view-con__pic-time-exit__time {
     text-shadow: 0px 6px 2px #000000;
     scale: 1.2;
     color: #dfdcdc
 }
 
-.HourlyFullView-wrapper__data-view-con__pic-time-exit__exit-btn{
+.HourlyFullView-wrapper__data-view-con__pic-time-exit__exit-btn {
     width: 30px;
     height: 30px;
     border-radius: 50%;
@@ -42,17 +43,17 @@
     cursor: pointer;
 }
 
-.HourlyFullView-wrapper__data-view-con__pic-time-exit__exit-btn:hover{
+.HourlyFullView-wrapper__data-view-con__pic-time-exit__exit-btn:hover {
     border: 2px solid rgb(163, 163, 163);
 }
 
-.HourlyFullView-wrapper__data-view-con__pic-time-exit__exit-btn img{
+.HourlyFullView-wrapper__data-view-con__pic-time-exit__exit-btn img {
     width: 60%;
     height: auto;
     filter: invert(100%);
 }
 
-.HourlyFullView-wrapper__data-view-con__pic-time-exit{
+.HourlyFullView-wrapper__data-view-con__pic-time-exit {
     height: 50px;
     display: flex;
     align-items: center;
