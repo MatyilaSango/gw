@@ -90,17 +90,6 @@ a {
   text-decoration: none;
 }
 
-.cprght-wrapper {
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  color: rgb(170, 170, 170);
-  background-color: black;
-}
-
 @media (prefers-color-scheme: dark) {
   html {
     color-scheme: dark;

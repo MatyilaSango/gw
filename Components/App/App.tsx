@@ -261,6 +261,10 @@ function App() {
       ) : (
         ""
       )}
+
+      <div className={styles['cprght-wrapper']}>
+        <span>&copy; {new Date().getUTCFullYear()} GW-Weather</span>
+      </div>
     </div>
   );
 }

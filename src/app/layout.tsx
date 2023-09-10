@@ -18,9 +18,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         {children}
-        <div className='cprght-wrapper'>
-          <span>&copy; {new Date().getUTCFullYear()} GW-Weather</span>
-        </div>
       </body>
     </html>
   )
