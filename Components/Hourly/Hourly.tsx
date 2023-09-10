@@ -1,7 +1,6 @@
 import React from 'react'
 import { hourlydataType } from '../../Types/types'
 import styles from "./Hourly.module.css"
-import Image from 'next/image'
 
 export default function Hourly({id, hour, icon, temp, type, setShowHourlyFullView, handleHourlyFullView}: hourlydataType | any) {
 
