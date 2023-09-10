@@ -4,7 +4,6 @@ import styles from "./Table.module.css";
 import hourlyStyles from "./HourlyFullViewTable.module.css"
 
 export default function Table({
-  hour,
   temp,
   precip,
   type,
@@ -20,11 +19,10 @@ export default function Table({
   cloudy_cover,
   visibility,
   cloud_ceiling,
-  icon
 }: hourlydataType | any) {
 
   return <div className={styles["table-wrapper"]}>
-    <table>
+    <table className={hourlyStyles["table-wrapper--font"]}>
       <tbody>
         <tr>
           <td>Type</td>
