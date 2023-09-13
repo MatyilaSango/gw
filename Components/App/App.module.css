@@ -216,4 +216,13 @@
   .components-container-bottom-nav__options {
     width: calc(100% - 180px);
   }
+
+  .components-container-top__hourly{
+    padding-left: 0;
+  }
+
+  .components-container-top__hourly--left_arrow,
+.components-container-top__hourly--right_arrow {
+  display: flex;
+}
 }
