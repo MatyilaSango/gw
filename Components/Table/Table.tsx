@@ -20,7 +20,7 @@ export default function Table({
     <table>
       <tbody>
         <tr>
-          <td>Tempereture</td>
+          <td>Temperature</td>
           <td>{temp}</td>
         </tr>
         <tr>
