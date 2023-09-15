@@ -28,8 +28,12 @@ import HourlyFullView from "../Hourly/HourlyFullView";
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
-function App() {
-  const [search, setSearch] = useState<string>("Cape Town, Western Cape");
+interface IApp {
+  initialLocation: string
+}
+
+function App({ initialLocation }: IApp) {
+  const [search, setSearch] = useState<string>(initialLocation);
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
   const [dailyData, setDailyData] = useState<dailyDataType>();
