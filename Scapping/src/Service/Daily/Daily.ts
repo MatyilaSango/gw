@@ -31,7 +31,7 @@ export class Daily {
 
   public isFreshData = (data: dailyDataType, day: string): boolean => {
     if (data) {
-      let date: Date = new Date();
+      //let date: Date = new Date();
       let date_now: String = this.formatDateNow(day);
       if (date_now !== data.date) {
         deleteDaily(data.search_parameter, day);
@@ -47,8 +47,9 @@ export class Daily {
     search: string,
     day: string | any
   ): Promise<void> => {
-    if (this.isFreshData(getDaily(search, day), day)) {
-      this._dailyData = getDaily(search, day);
+    let dailyData: dailyDataType = getDaily(search, day)
+    if (this.isFreshData(dailyData, day)) {
+      this._dailyData = dailyData;
     } else {
       let hourlyLink = await axios
         .get(`https://www.accuweather.com/en/search-locations?query=${search}`)
@@ -67,9 +68,7 @@ export class Daily {
         .then((results) => results);
 
       var that = this;
-
       let tempDayNightList: dataType[] = [];
-
       let $ = cheerio.load(hourlyresponse);
 
       //Scrapping the day and night data.
@@ -166,7 +165,6 @@ export class Daily {
             continue;
           }
         }
-
         tempDayNightList.push(tempDayNightData);
       });
 
@@ -189,7 +187,6 @@ export class Daily {
             rise: "",
             set: "",
           };
-
           let durationList: string[] = String(
             $(this)
               .find(".spaced-content:nth-child(1)")
@@ -211,7 +208,6 @@ export class Daily {
             .find(".text-value:nth-child(2)")
             .text()
             .trim();
-
           tempRiseSetList.push(tempRiseSetData);
         });
 
@@ -233,7 +229,6 @@ export class Daily {
             high: "",
             low: "",
           };
-
           tempHighLowData.high = $(this)
             .find(".temperature:nth-child(2)")
             .text()
@@ -242,7 +237,6 @@ export class Daily {
             .find(".temperature:nth-child(3)")
             .text()
             .trim();
-
           tempHighLowList.push(tempHighLowData);
         });
 
@@ -257,7 +251,6 @@ export class Daily {
       this._dailyData.data.day_night = day_night_data;
       this._dailyData.data.sunrise_sunset = sunrise_sunset_data;
       this._dailyData.data.temperature_history = TemperatureHistory;
-
       this._dailyData.search_parameter = search;
       setDaily(this._dailyData);
     }

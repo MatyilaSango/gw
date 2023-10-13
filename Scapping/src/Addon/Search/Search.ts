@@ -23,6 +23,5 @@ export const getSearchOption = async (
   } else if (locationObj.getLocations().available_locations.length > 0) {
     return "locations";
   }
-
   return "";
 };
