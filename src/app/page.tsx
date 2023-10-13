@@ -1,7 +1,10 @@
 import App from "../../Components/App/App";
+import axios from "axios";
 
-export default function Home() {
+export default async function Home() {
+  const data = await (await axios.get("https://ipinfo.io/")).data
+
   return (
-    <App />
+    <App initialLocation={`${data.city},${data.region}`} />
   )
 }

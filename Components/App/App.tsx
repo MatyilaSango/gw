@@ -28,8 +28,12 @@ import HourlyFullView from "../Hourly/HourlyFullView";
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
-function App() {
-  const [search, setSearch] = useState<string>("Cape Town, Western Cape");
+interface IApp {
+  initialLocation: string
+}
+
+function App({ initialLocation }: IApp) {
+  const [search, setSearch] = useState<string>(initialLocation);
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
   const [dailyData, setDailyData] = useState<dailyDataType>();
@@ -44,13 +48,10 @@ function App() {
   useEffect(() => {
     if (reRender) {
       todayHandler(search).then((res) => setTodayData(res as todayDataType));
-
       hourlyHandler(search).then((res) => setHourlyData(res as hourlyDataType));
-
       dailyHandler(search, dailyOption).then((res) =>
         setDailyData(res as dailyDataType)
       );
-
       if (dailyData) {
         const tempDN = [];
         dailyData?.data.day_night?.day
@@ -62,7 +63,6 @@ function App() {
         setDay_night(tempDN);
         setreRender(false);
       }
-
       document.title = "GW-Weather | " + search;
     }
   }, [dailyData, search]);

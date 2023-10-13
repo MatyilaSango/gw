@@ -7,7 +7,6 @@ export default async function dailyHandler(
 ) {
   const location_query: string = search;
   const day_query: string = dailyOption;
-
   const res = await getSearchOption(location_query, "daily", day_query);
   if (res === "daily") {
     return dailyObj.getData(location_query, day_query);
