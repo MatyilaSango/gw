@@ -24,6 +24,7 @@ import dailyHandler from "../../Scapping/src/Controller/Daily/Daily";
 import hourlyHandler from "../../Scapping/src/Controller/Hourly/Hourly";
 import todayHandler from "../../Scapping/src/Controller/Today/Today";
 import HourlyFullView from "../Hourly/HourlyFullView";
+import getRootHTMLPage from "../../Scapping/src/Addon/RootPage/RootPage";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -39,33 +40,37 @@ function App({ initialLocation }: IApp) {
   const [dailyData, setDailyData] = useState<dailyDataType>();
   const [day_night, setDay_night] = useState<dataType[] | any[]>([]);
   const [reRender, setreRender] = useState<boolean>(true);
-  const [dailyOption, setDailyOption] = useState<string>("0");
+  const [dailyOption, setDailyOption] = useState<string>("1");
   const [backgroundPic, setBackgroundPic] = useState<string>("");
   const [showHourlyFullView, setShowHourlyFullView] = useState<boolean>(false);
   const [hourlyFullViewdata, setHourlyFullViewdata] = useState<hourlydataType>();
-  //const TEN_MINUTES: number = 600000;
+  const [rootPage, setRootPage] = useState<Promise<any>>()
 
   useEffect(() => {
     if (reRender) {
-      todayHandler(search).then((res) => setTodayData(res as todayDataType));
-      hourlyHandler(search).then((res) => setHourlyData(res as hourlyDataType));
-      dailyHandler(search, dailyOption).then((res) =>
+      const _rootPage = getRootHTMLPage(search)
+      todayHandler(search, _rootPage).then((res) => setTodayData(res as todayDataType));
+      hourlyHandler(search, _rootPage).then((res) => setHourlyData(res as hourlyDataType));
+      dailyHandler(search, dailyOption, _rootPage).then((res) =>
         setDailyData(res as dailyDataType)
       );
-      if (dailyData) {
-        const tempDN = [];
-        dailyData?.data.day_night?.day
-          ? tempDN.push(dailyData?.data.day_night?.day)
-          : 0;
-        dailyData?.data.day_night?.night
-          ? tempDN.push(dailyData?.data.day_night?.night)
-          : 0;
-        setDay_night(tempDN);
-        setreRender(false);
-      }
       document.title = "GW-Weather | " + search;
     }
-  }, [dailyData, search]);
+  }, [search]);
+
+  useEffect(() => {
+    if (dailyData) {
+      const tempDN = [];
+      dailyData?.data.day_night?.day
+        ? tempDN.push(dailyData?.data.day_night?.day)
+        : 0;
+      dailyData?.data.day_night?.night
+        ? tempDN.push(dailyData?.data.day_night?.night)
+        : 0;
+      setDay_night(tempDN);
+      setreRender(false);
+    }
+  }, [dailyData])
 
   const handleSetSearch = (parameter: string): void => {
     setSearch(parameter);
@@ -129,6 +134,7 @@ function App({ initialLocation }: IApp) {
               setBackgroundPic={setBackgroundPic}
               wallpaper={wallpaper}
               wallpaperNight={wallpaperNight}
+              getRootHTMLPage={getRootHTMLPage}
             />
           )}
           <div className={styles["components-container-top__hourly"]}>

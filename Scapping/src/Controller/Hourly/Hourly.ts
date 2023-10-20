@@ -1,9 +1,6 @@
 import { hourlyObj } from "../../Addon/Objects/Objects";
-import { getSearchOption } from "../../Addon/Search/Search";
 
-export default async function hourlyHandler(query: string) {
-  const res = await getSearchOption(query, "hourly");
-  if (res === "hourly") {
-    return hourlyObj.getData(query);
-  }
+export default async function hourlyHandler(query: string, rootPage: Promise<any>) {
+  await hourlyObj.scrapHourly(query, rootPage);
+  return hourlyObj.getData(query);
 }

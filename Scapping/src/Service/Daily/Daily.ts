@@ -15,8 +15,6 @@ import DailyModel from "../../Models/Daily";
 export class Daily {
   private _dailyData: dailyDataType = new DailyModel().model;
 
-  private _NUMBEROFDAYS = 12;
-
   constructor() {}
 
   public formatDateNow = (day: string): String => {
@@ -45,22 +43,20 @@ export class Daily {
 
   public scrapDaily = async (
     search: string,
-    day: string | any
+    day: string | any,
+    rootPage: Promise<any>
   ): Promise<void> => {
-    let dailyData: dailyDataType = getDaily(search, day)
+    let dailyData: dailyDataType = getDaily(search, day);
     if (this.isFreshData(dailyData, day)) {
       this._dailyData = dailyData;
     } else {
-      let hourlyLink = await axios
-        .get(`https://www.accuweather.com/en/search-locations?query=${search}`)
-        .then((prom) => prom.data)
-        .then((results) => {
-          let $ = cheerio.load(results);
-          return (
-            "https://www.accuweather.com" +
-            $(".subnav-item").toArray()[2].attribs.href
-          );
-        });
+      let hourlyLink = await rootPage.then((results) => {
+        let $ = cheerio.load(results);
+        return (
+          "https://www.accuweather.com" +
+          $(".subnav-item").toArray()[2].attribs.href
+        );
+      });
 
       let hourlyresponse = await axios
         .get(hourlyLink + `?day=${day}`)

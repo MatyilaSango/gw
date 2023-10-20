@@ -1,4 +1,3 @@
-import axios from "axios";
 import cheerio from "cheerio";
 import { locationsType } from "../../../../Types/types";
 import LocationModel from "../../Models/Location";
@@ -8,11 +7,9 @@ export class Locations {
 
   constructor() {}
 
-  public scrapLocations = async (search: string): Promise<void> => {
+  public scrapLocations = async (search: string, getRootHTMLPage: (search: string) => Promise<any>): Promise<void> => {
     this._locations.search_parameter = search;
-    let response = await axios
-      .get(`https://www.accuweather.com/en/search-locations?query=${search}`)
-      .then((prom) => prom.data)
+    let response = await getRootHTMLPage(search)
       .then((results) => results);
 
     let $ = cheerio.load(response);

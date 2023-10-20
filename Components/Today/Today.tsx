@@ -3,8 +3,7 @@ import { locationsType, todayType } from "../../Types/types";
 import styles from "./Today.module.css";
 import appStyles from "../App/App.module.css";
 import SearchOption from "../SearchOptions/SearchOption";
-import Image from "next/image";
-import { Locations } from "../../Scapping/src/Service/Locations/Locations";
+import locationsHandler from "../../Scapping/src/Controller/Location/Location";
 
 interface ITodayProps {
   data: todayType;
@@ -13,6 +12,7 @@ interface ITodayProps {
   setBackgroundPic: (value: React.SetStateAction<string>) => void;
   wallpaper: string;
   wallpaperNight: string;
+  getRootHTMLPage: (search: string) => Promise<any>
 }
 
 export default function Today({
@@ -22,6 +22,7 @@ export default function Today({
   setBackgroundPic,
   wallpaper,
   wallpaperNight,
+  getRootHTMLPage
 }: ITodayProps) {
   const [locations, setLocations] = useState<locationsType>();
 
@@ -57,10 +58,8 @@ export default function Today({
         document
           .querySelector(`.${appStyles["loading-wrapper"]}`)
           ?.classList.remove(`${appStyles["loading-wrapper__hide"]}`);
-        let locations: Locations = new Locations();
-        locations.scrapLocations(inpitValue);
 
-        let res: locationsType = locations.getLocations();
+        let res: locationsType = await  locationsHandler(inpitValue, getRootHTMLPage);
 
         if (res.hasOwnProperty("available_locations")) {
           document
