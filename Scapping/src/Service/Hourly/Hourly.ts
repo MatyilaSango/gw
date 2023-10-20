@@ -25,21 +25,21 @@ export class Hourly {
     return false;
   };
 
-  public scrapHourly = async (search: string): Promise<void> => {
-    let hourlyData: hourlyDataType = getHourly(search)
+  public scrapHourly = async (
+    search: string,
+    rootPage: Promise<any>
+  ): Promise<void> => {
+    let hourlyData: hourlyDataType = getHourly(search);
     if (this.isFreshData(hourlyData)) {
       this._hourlyData = hourlyData;
     } else {
-      let hourlyLink = await axios
-        .get(`https://www.accuweather.com/en/search-locations?query=${search}`)
-        .then((prom) => prom.data)
-        .then((results) => {
-          let $ = cheerio.load(results);
-          return (
-            "https://www.accuweather.com" +
-            $(".subnav-item").toArray()[1].attribs.href
-          );
-        });
+      let hourlyLink = await rootPage.then((results) => {
+        let $ = cheerio.load(results);
+        return (
+          "https://www.accuweather.com" +
+          $(".subnav-item").toArray()[1].attribs.href
+        );
+      });
 
       let hourlyresponse = await axios
         .get(hourlyLink)
