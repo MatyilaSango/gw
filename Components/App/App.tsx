@@ -44,11 +44,12 @@ function App({ initialLocation }: IApp) {
   const [backgroundPic, setBackgroundPic] = useState<string>("");
   const [showHourlyFullView, setShowHourlyFullView] = useState<boolean>(false);
   const [hourlyFullViewdata, setHourlyFullViewdata] = useState<hourlydataType>();
-  const [rootPage, setRootPage] = useState<Promise<any>>()
+  const [rootPage, setRootPage] = useState<Promise<any>>();
 
   useEffect(() => {
     if (reRender) {
       const _rootPage = getRootHTMLPage(search)
+      setRootPage(prev => prev = _rootPage)
       todayHandler(search, _rootPage).then((res) => setTodayData(res as todayDataType));
       hourlyHandler(search, _rootPage).then((res) => setHourlyData(res as hourlyDataType));
       dailyHandler(search, dailyOption, _rootPage).then((res) =>
@@ -57,6 +58,14 @@ function App({ initialLocation }: IApp) {
       document.title = "GW-Weather | " + search;
     }
   }, [search]);
+
+  useEffect(() => {
+    if (rootPage) {
+      dailyHandler(search, dailyOption, rootPage as Promise<any>).then((res) =>
+        setDailyData(res as dailyDataType)
+      );
+    }
+  }, [dailyOption])
 
   useEffect(() => {
     if (dailyData) {
@@ -73,7 +82,7 @@ function App({ initialLocation }: IApp) {
   }, [dailyData])
 
   const handleSetSearch = (parameter: string): void => {
-    setSearch(parameter);
+    setSearch(parameter.trim());
     setDailyData(undefined);
     setreRender(true);
     document
@@ -121,7 +130,7 @@ function App({ initialLocation }: IApp) {
 
       <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
 
-      <div
+      {search ? (<div
         className={styles["components-container"]}
         id="components-container "
       >
@@ -249,6 +258,10 @@ function App({ initialLocation }: IApp) {
         )}
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
       </div>
+      ) : (
+        ""
+      )}
+
       {reRender ? (
         <div className={styles["loading-wrapper"]}>
           <div className={styles["loading-wrapper__gif"]}>

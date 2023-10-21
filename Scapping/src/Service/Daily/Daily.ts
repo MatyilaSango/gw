@@ -29,14 +29,12 @@ export class Daily {
 
   public isFreshData = (data: dailyDataType, day: string): boolean => {
     if (data) {
-      //let date: Date = new Date();
       let date_now: String = this.formatDateNow(day);
       if (date_now !== data.date) {
         deleteDaily(data.search_parameter, day);
         return false;
-      } else {
-        return true;
       }
+      return true;
     }
     return false;
   };
@@ -248,7 +246,7 @@ export class Daily {
       this._dailyData.data.sunrise_sunset = sunrise_sunset_data;
       this._dailyData.data.temperature_history = TemperatureHistory;
       this._dailyData.search_parameter = search;
-      setDaily(this._dailyData);
+      setDaily(this._dailyData, day);
     }
   };
 
