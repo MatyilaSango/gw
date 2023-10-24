@@ -57,11 +57,22 @@ function App() {
     if (reRender && search) {
       const _rootPage = getRootHTMLPage(search)
       setRootPage(prev => prev = _rootPage)
-      todayHandler(search, _rootPage).then((res) => setTodayData(res as todayDataType));
-      hourlyHandler(search, _rootPage).then((res) => setHourlyData(res as hourlyDataType));
-      dailyHandler(search, dailyOption, _rootPage).then((res) =>
-        setDailyData(res as dailyDataType)
-      );
+
+      const todayPromise = new Promise((reslove, reject) => {
+        reslove(todayHandler(search, _rootPage).then((res) => setTodayData(res as todayDataType)))
+      })
+
+      const hourlyPromise = new Promise((reslove, reject) => {
+        reslove(hourlyHandler(search, _rootPage).then((res) => setHourlyData(res as hourlyDataType)))
+      })
+
+      const dailyPromise = new Promise((reslove, reject) => {
+        reslove(dailyHandler(search, dailyOption, _rootPage).then((res) =>
+          setDailyData(res as dailyDataType)
+        ))
+      })
+
+      Promise.all([todayPromise, hourlyPromise, dailyPromise])
       document.title = "GW-Weather | " + search;
     }
   }, [search]);
