@@ -50,6 +50,7 @@ function App() {
         setSearch(`${data.city}, ${data.region}, ${data.country}`)
       }
       return () => {
+        console.log("testing", !search)
         getMyLocation()
       }
     }
