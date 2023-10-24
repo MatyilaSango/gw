@@ -29,12 +29,8 @@ import getRootHTMLPage from "../../Scapping/src/Addon/RootPage/RootPage";
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
-interface IApp {
-  initialLocation: string
-}
-
-function App({ initialLocation }: IApp) {
-  const [search, setSearch] = useState<string>(initialLocation);
+function App() {
+  const [search, setSearch] = useState<string>("");
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
   const [dailyData, setDailyData] = useState<dailyDataType>();
@@ -47,7 +43,18 @@ function App({ initialLocation }: IApp) {
   const [rootPage, setRootPage] = useState<Promise<any>>();
 
   useEffect(() => {
-    if (reRender) {
+    if (!search) {
+      const getMyLocation = async (): Promise<void> => {
+        const ipdata = await (await fetch("https://surfshark.com/api/v1/server/user")).json()
+        const data = await (await fetch(`https://ipapi.co/${await ipdata.ip}/json/`)).json()
+        setSearch(`${data.city}, ${data.region}, ${data.country}`)
+      }
+      getMyLocation()
+    }
+  }, [])
+
+  useEffect(() => {
+    if (reRender && search) {
       const _rootPage = getRootHTMLPage(search)
       setRootPage(prev => prev = _rootPage)
       todayHandler(search, _rootPage).then((res) => setTodayData(res as todayDataType));
@@ -60,7 +67,7 @@ function App({ initialLocation }: IApp) {
   }, [search]);
 
   useEffect(() => {
-    if (rootPage) {
+    if (rootPage && search) {
       dailyHandler(search, dailyOption, rootPage as Promise<any>).then((res) =>
         setDailyData(res as dailyDataType)
       );
