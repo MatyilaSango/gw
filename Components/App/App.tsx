@@ -50,9 +50,7 @@ function App() {
         const data = await (await fetch(`https://ipapi.co/${await ipdata.ip}/json/`)).json()
         setSearch(`${data.city}, ${data.region}, ${data.country}`)
       }
-      return () => {
-        getMyLocation()
-      }
+      console.log("getting data", getMyLocation())
     }
   }, [])
 
