@@ -43,14 +43,13 @@ function App() {
   const [rootPage, setRootPage] = useState<Promise<any>>();
 
   useEffect(() => {
-    console.log("testing", !search)
     if (!search) {
       const getMyLocation = async (): Promise<void> => {
         const ipdata = await (await fetch("https://surfshark.com/api/v1/server/user")).json()
         const data = await (await fetch(`https://ipapi.co/${await ipdata.ip}/json/`)).json()
         setSearch(`${data.city}, ${data.region}, ${data.country}`)
       }
-      console.log("getting data", getMyLocation())
+      getMyLocation()
     }
   }, [])
 
