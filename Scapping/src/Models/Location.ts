@@ -1,6 +1,7 @@
 import { locationsType } from "../../../Types/types";
 
 export default class LocationModel {
+  
   private _locations: locationsType = {
     search_parameter: "",
     weather_site: "accuweather",

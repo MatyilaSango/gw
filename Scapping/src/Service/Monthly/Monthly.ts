@@ -5,6 +5,7 @@ import { deleteMonthly, getMonthly, setMonthly } from "../../Storage";
 import axios from "axios";
 
 export class Month {
+    
   private _monthlyData: monthlyWeatherData = new MonthlyModel().model;
   private readonly MONTHS = [
     "January",
