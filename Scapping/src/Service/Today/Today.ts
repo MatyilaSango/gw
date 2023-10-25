@@ -7,7 +7,7 @@ export class Today {
   private _data_by_location: todayDataType = new TodayModel().model;
   constructor() {}
 
-  public isFreshData = (data: todayDataType): boolean => {
+  private isFreshData = (data: todayDataType): boolean => {
     if (data) {
       let date_now: Date = new Date();
       var data_time = new Date(data.data.date.getTime());
