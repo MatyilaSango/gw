@@ -1,6 +1,7 @@
 import { todayDataType } from "../../../Types/types";
 
 export default class TodayModel {
+  
   private _data_by_location: todayDataType = {
     search_parameter: "",
     weather_site: "accuweather",

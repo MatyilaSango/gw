@@ -1,6 +1,7 @@
 import { dailyDataType } from "../../../Types/types";
 
 export default class DailyModel {
+  
   private _dailyData: dailyDataType = {
     search_parameter: "",
     weather_site: "accuweather",

@@ -17,7 +17,7 @@ export class Daily {
 
   constructor() {}
 
-  public formatDateNow = (day: string): String => {
+  private formatDateNow = (day: string): String => {
     let correct_day: Number =
       Number(day) === 0 || Number(day) === 1 ? 0 : Number(day);
     let date: Date = new Date();
@@ -27,7 +27,7 @@ export class Daily {
     return date_now;
   };
 
-  public isFreshData = (data: dailyDataType, day: string): boolean => {
+  private isFreshData = (data: dailyDataType, day: string): boolean => {
     if (data) {
       let date_now: String = this.formatDateNow(day);
       if (date_now !== data.date) {

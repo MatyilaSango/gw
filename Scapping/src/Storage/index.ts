@@ -2,11 +2,13 @@ import {
   todayDataType,
   hourlyDataType,
   dailyDataType,
+  monthlyWeatherData,
 } from "../../../Types/types";
 
 const todayDataMap = new Map<string, todayDataType>()
 const hourlyDataMap = new Map<string, hourlyDataType>()
 const dailyDataMap = new Map<string, dailyDataType>()
+const monthlyDataMap = new Map<string, monthlyWeatherData>()
 
 //today getter and setter
 export const setToday = (today: todayDataType): void => {
@@ -45,4 +47,17 @@ export const getDaily = (location: string, day: string): dailyDataType => {
 
 export const deleteDaily = (location: string, day: string): void => {
   dailyDataMap.delete(`${location}_${day}`)
+};
+
+//monthly getter and setter
+export const setMonthly = (location: string, monthly: monthlyWeatherData): void => {
+  monthlyDataMap.set(`${location}_${monthly.month}`, monthly);
+};
+
+export const getMonthly  = (location: string, month: string): monthlyWeatherData => {
+  return monthlyDataMap.get(`${location}_${month}`) as monthlyWeatherData;
+};
+
+export const deleteMonthly  = (location: string, month: string): void => {
+  monthlyDataMap.delete(`${location}_${month}`)
 };

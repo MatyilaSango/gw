@@ -112,3 +112,24 @@ export type dailyDataType = {
     date: string,
     data: daySunTempType
 }
+
+//Montly types
+
+export type monthlyTemperature = {
+    high: string,
+    low: string
+} 
+
+export type monthlyData = {
+    day: string,
+    icon: string,
+    temperature: monthlyTemperature
+}
+
+export type monthlyWeatherData = {
+    search_parameter: string,
+    weather_site: string,
+    month: string,
+    year: string,
+    data: monthlyData[]
+}

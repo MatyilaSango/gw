@@ -12,6 +12,7 @@ import {
   dataType,
   hourlyDataType,
   hourlydataType,
+  monthlyWeatherData,
   todayDataType,
 } from "../../Types/types";
 import Hourly from "../Hourly/Hourly";
@@ -25,6 +26,7 @@ import hourlyHandler from "../../Scapping/src/Controller/Hourly/Hourly";
 import todayHandler from "../../Scapping/src/Controller/Today/Today";
 import HourlyFullView from "../Hourly/HourlyFullView";
 import getRootHTMLPage from "../../Scapping/src/Addon/RootPage/RootPage";
+import monthlyHandler from "../../Scapping/src/Controller/Mothly/Monthly";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -34,6 +36,7 @@ function App() {
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
   const [dailyData, setDailyData] = useState<dailyDataType>();
+  const [monthlyData, setMonthlyData] = useState<monthlyWeatherData>();
   const [day_night, setDay_night] = useState<dataType[] | any[]>([]);
   const [reRender, setreRender] = useState<boolean>(true);
   const [dailyOption, setDailyOption] = useState<string>("1");
@@ -72,7 +75,13 @@ function App() {
         ))
       })
 
-      Promise.all([todayPromise, hourlyPromise, dailyPromise])
+      const monthlyPromise = new Promise((reslove, reject) => {
+        reslove(monthlyHandler(search, _rootPage).then((res) =>
+          setMonthlyData(res as monthlyWeatherData)
+        ))
+      })
+
+      Promise.all([todayPromise, hourlyPromise, dailyPromise]) // To do add monthly promise
       document.title = "GW-Weather | " + search;
     }
   }, [search]);

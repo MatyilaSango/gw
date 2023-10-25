@@ -3,6 +3,7 @@ import { locationsType } from "../../../../Types/types";
 import LocationModel from "../../Models/Location";
 
 export class Locations {
+  
   private _locations: locationsType = new LocationModel().model;
 
   constructor() {}

@@ -8,7 +8,7 @@ export class Hourly {
   private _hourlyData: hourlyDataType = new HourlyModel().model;
   constructor() {}
 
-  public isFreshData = (data: hourlyDataType): boolean => {
+  private isFreshData = (data: hourlyDataType): boolean => {
     if (data) {
       let date_now: Date = new Date();
       var data_hour: number =
