@@ -34,6 +34,11 @@ export default function Today({
     const timeInterval = setInterval(async () => {
       let date = new Date();
       date.setHours(date.getUTCHours() + Number(data.offset));
+      if (date.getHours() === 12) {
+        date.setHours(0)
+      } else if (date.getHours() === 0) {
+        date.setHours(12)
+      }
       setTime((prev) => (prev = date));
       if (
         (date.getHours() >= 18 && date?.getHours() <= 24) ||
@@ -59,7 +64,7 @@ export default function Today({
           .querySelector(`.${appStyles["loading-wrapper"]}`)
           ?.classList.remove(`${appStyles["loading-wrapper__hide"]}`);
 
-        let res: locationsType = await  locationsHandler(inpitValue, getRootHTMLPage);
+        let res: locationsType = await locationsHandler(inpitValue, getRootHTMLPage);
 
         if (res.hasOwnProperty("available_locations")) {
           document
