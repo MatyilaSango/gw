@@ -1,0 +1,54 @@
+.Calender-wrapper {
+    width: 600px;
+    background-color: #ffffff30;
+    border-radius: 20px;
+    overflow: hidden;
+    margin-top: 20px;
+}
+
+.Calender-wrapper__heading {
+    height: 60px;
+    width: 100%;
+    background-color: #4726a4;
+    display: flex;
+}
+
+.Calender-wrapper__heading__text,
+.Calender-wrapper__heading__month-year {
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+}
+
+.Calender-wrapper__heading__text {
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.Calender-wrapper__heading__month-year {
+    justify-content: end;
+}
+
+.Calender-wrapper__days {
+    width: 100%;
+    height: 30px;
+    background-image: linear-gradient(to bottom, #4726a4, transparent);
+    display: flex;
+    color: #ffffff95;
+}
+
+.Calender-wrapper__days-day {
+    width: 14%;
+    margin: 0 1.495px 0px 1.495px;
+    display: flex;
+    justify-content: center;
+}
+
+.Calender-wrapper__days-container {
+    width: 100%;
+    padding: 0 0px;
+    display: flex;
+    flex-flow: row wrap;
+}
