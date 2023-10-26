@@ -5,7 +5,6 @@ import { deleteMonthly, getMonthly, setMonthly } from "../../Storage";
 import axios from "axios";
 
 export class Month {
-    
   private _monthlyData: monthlyWeatherData = new MonthlyModel().model;
   private readonly MONTHS = [
     "January",
@@ -44,8 +43,8 @@ export class Month {
     if (this.isFreshData(search, monthlyData)) {
       this._monthlyData = monthlyData;
     } else {
+      this._monthlyData = new MonthlyModel().model;
       this._monthlyData.search_parameter = search;
-
       let monthlyLink = await rootPage.then((results) => {
         let $ = cheerio.load(results);
         return (
