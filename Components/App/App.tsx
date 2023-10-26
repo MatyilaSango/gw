@@ -27,6 +27,7 @@ import todayHandler from "../../Scapping/src/Controller/Today/Today";
 import HourlyFullView from "../Hourly/HourlyFullView";
 import getRootHTMLPage from "../../Scapping/src/Addon/RootPage/RootPage";
 import monthlyHandler from "../../Scapping/src/Controller/Mothly/Monthly";
+import Calender from "../Calender/Calender";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
@@ -81,7 +82,7 @@ function App() {
         ))
       })
 
-      Promise.all([todayPromise, hourlyPromise, dailyPromise]) // To do add monthly promise
+      Promise.all([todayPromise, hourlyPromise, dailyPromise, monthlyPromise]) // To do add monthly promise
       document.title = "GW-Weather | " + search;
     }
   }, [search]);
@@ -111,6 +112,7 @@ function App() {
   const handleSetSearch = (parameter: string): void => {
     setSearch(parameter.trim());
     setDailyData(undefined);
+    setMonthlyData(undefined)
     setreRender(true);
     document
       .querySelector(`.${todayStyles["today-wrapper__input-search__search"]}`)
@@ -283,6 +285,7 @@ function App() {
         ) : (
           ""
         )}
+        <Calender month={monthlyData?.month} year={monthlyData?.year} data={monthlyData?.data} />
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
       </div>
       ) : (
