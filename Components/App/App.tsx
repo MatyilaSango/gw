@@ -285,7 +285,9 @@ function App() {
         ) : (
           ""
         )}
-        <Calender month={monthlyData?.month} year={monthlyData?.year} data={monthlyData?.data} />
+        <div className={styles["App__Calender-wrapper"]}>
+          <Calender month={monthlyData?.month} year={monthlyData?.year} data={monthlyData?.data} />
+        </div>
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
       </div>
       ) : (
