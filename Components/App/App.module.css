@@ -189,6 +189,16 @@
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.App__Calender-wrapper {
+  position: relative;
+  width: fit-content;
+  height: fit-content;
+  margin-top: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 @media screen and (max-width: 700px) {
   .components-container-top {
@@ -217,12 +227,18 @@
     width: calc(100% - 180px);
   }
 
-  .components-container-top__hourly{
+  .components-container-top__hourly {
     padding-left: 0;
   }
 
   .components-container-top__hourly--left_arrow,
-.components-container-top__hourly--right_arrow {
-  display: flex;
-}
+  .components-container-top__hourly--right_arrow {
+    display: flex;
+  }
+
+  .App__Calender-wrapper {
+    width: 400px;
+    height: 500px;
+    overflow: hidden;
+  }
 }
