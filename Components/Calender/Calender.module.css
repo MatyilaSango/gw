@@ -52,3 +52,24 @@
     display: flex;
     flex-flow: row wrap;
 }
+
+@media screen and (max-width: 700px) {
+    .Calender-wrapper{
+        scale: 0.65;
+        position: relative;
+        left: -100px;
+        top: -100px;
+    }
+    .Calender-wrapper__heading__text,
+    .Calender-wrapper__heading__month-year{
+        scale: 1.5;
+    }
+    .Calender-wrapper__heading__text{
+        position: relative;
+        left: 60px
+    }
+    .Calender-wrapper__heading__month-year{
+        position: relative;
+        right: 60px
+    }
+}
