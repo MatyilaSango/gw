@@ -28,12 +28,14 @@ import HourlyFullView from "../Hourly/HourlyFullView";
 import getRootHTMLPage from "../../Scapping/src/Addon/RootPage/RootPage";
 import monthlyHandler from "../../Scapping/src/Controller/Mothly/Monthly";
 import Calender from "../Calender/Calender";
+import WeatherMap from "../Map/WeatherMap";
 
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
 function App() {
   const [search, setSearch] = useState<string>("");
+  const [ipData, setIpData] = useState<any>()
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
   const [dailyData, setDailyData] = useState<dailyDataType>();
@@ -52,6 +54,7 @@ function App() {
         const ipdata = await (await fetch("https://surfshark.com/api/v1/server/user")).json()
         const data = await (await fetch(`https://ipapi.co/${await ipdata.ip}/json/`)).json()
         setSearch(`${data.city}, ${data.region}, ${data.country}`)
+        setIpData(data)
       }
       getMyLocation()
     }
@@ -285,9 +288,17 @@ function App() {
         ) : (
           ""
         )}
-        <div className={styles["App__Calender-wrapper"]}>
-          <Calender month={monthlyData?.month} year={monthlyData?.year} data={monthlyData?.data} />
+
+        <div className={styles["Calender-map-wrapper"]}>
+          <div className={styles["App__Calender-wrapper"]}>
+            <Calender month={monthlyData?.month} year={monthlyData?.year} data={monthlyData?.data} />
+          </div>
+          <div className={styles["App__Calender-wrapper"]}>
+            <WeatherMap latitude={ipData.latitude} longitude={ipData.longitude} />
+          </div>
+
         </div>
+
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
       </div>
       ) : (
