@@ -175,7 +175,6 @@ function App() {
               setBackgroundPic={setBackgroundPic}
               wallpaper={wallpaper}
               wallpaperNight={wallpaperNight}
-              getRootHTMLPage={getRootHTMLPage}
             />
           )}
           <div className={styles["components-container-top__hourly"]}>

@@ -12,7 +12,6 @@ interface ITodayProps {
   setBackgroundPic: (value: React.SetStateAction<string>) => void;
   wallpaper: string;
   wallpaperNight: string;
-  getRootHTMLPage: (search: string) => Promise<any>
 }
 
 export default function Today({
@@ -22,7 +21,6 @@ export default function Today({
   setBackgroundPic,
   wallpaper,
   wallpaperNight,
-  getRootHTMLPage
 }: ITodayProps) {
   const [locations, setLocations] = useState<locationsType>();
 
@@ -58,30 +56,28 @@ export default function Today({
   const handleSearch = async (e: any): Promise<void> => {
     const inpitValue: string = e.target.value;
     if (inpitValue === "") return;
-    if (e.key === "Enter") {
-      try {
+    try {
+      document
+        .querySelector(`.${appStyles["loading-wrapper"]}`)
+        ?.classList.remove(`${appStyles["loading-wrapper__hide"]}`);
+
+      let res: locationsType = await locationsHandler(inpitValue);
+      
+      if (res.hasOwnProperty("available_locations")) {
+        document
+          .querySelector(`.${styles["today-wrapper__input-search__search"]}`)
+          ?.classList.remove(`${styles["removeLocations"]}`);
+        setLocations(res);
         document
           .querySelector(`.${appStyles["loading-wrapper"]}`)
-          ?.classList.remove(`${appStyles["loading-wrapper__hide"]}`);
-
-        let res: locationsType = await locationsHandler(inpitValue, getRootHTMLPage);
-
-        if (res.hasOwnProperty("available_locations")) {
-          document
-            .querySelector(`.${styles["today-wrapper__input-search__search"]}`)
-            ?.classList.remove(`${styles["removeLocations"]}`);
-          setLocations(res);
-          document
-            .querySelector(`.${appStyles["loading-wrapper"]}`)
-            ?.classList.add(`${appStyles["loading-wrapper__hide"]}`);
-        } else {
-          handleSetSearch(inpitValue);
-        }
-
-        inputRef.current = "";
-      } catch {
-        alert("No such locations found!");
+          ?.classList.add(`${appStyles["loading-wrapper__hide"]}`);
+      } else {
+        handleSetSearch(inpitValue);
       }
+
+      inputRef.current = "";
+    } catch {
+      alert("No such locations found!");
     }
   };
 
@@ -93,7 +89,7 @@ export default function Today({
           type="text"
           placeholder="Search..."
           ref={inputRef}
-          onKeyDown={handleSearch}
+          onChange={handleSearch}
         />
         <div className={styles["today-wrapper__input-search__search"]}>
           {locations
