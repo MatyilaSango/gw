@@ -236,7 +236,7 @@ function App() {
               >
                 <Options
                   handleSetDailyOption={handleSetDailyOption}
-                  offsetHours={Number(todayData?.data.offset)}
+                  offsetHours={Number(todayData?.data.offset.hours)}
                 />
               </div>
             </div>

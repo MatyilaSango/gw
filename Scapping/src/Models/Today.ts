@@ -8,7 +8,10 @@ export default class TodayModel {
     data: {
       title: "Current weather",
       time: "",
-      offset: "",
+      offset: {
+        hours: "",
+        minutes: ""
+      },
       date: new Date(),
       temp: "",
       real_feel: "",

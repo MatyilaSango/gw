@@ -23,15 +23,14 @@ export default function Today({
   wallpaperNight,
 }: ITodayProps) {
   const [locations, setLocations] = useState<locationsType>();
-
   let inputRef = useRef<String | any>();
-
   const [time, setTime] = useState<Date>();
 
   useEffect(() => {
     const timeInterval = setInterval(async () => {
       let date = new Date();
-      date.setHours(date.getUTCHours() + Number(data.offset));
+      date.setHours(date.getUTCHours() + Number(data.offset.hours));
+      date.setMinutes(date.getUTCMinutes() + Number(data.offset.minutes))
       if (date.getHours() === 12) {
         date.setHours(0)
       } else if (date.getHours() === 0) {
@@ -62,7 +61,7 @@ export default function Today({
         ?.classList.remove(`${appStyles["loading-wrapper__hide"]}`);
 
       let res: locationsType = await locationsHandler(inpitValue);
-      
+
       if (res.hasOwnProperty("available_locations")) {
         document
           .querySelector(`.${styles["today-wrapper__input-search__search"]}`)
