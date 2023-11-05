@@ -77,7 +77,7 @@ export class Today {
           }
         });
       this._data_by_location.search_parameter = search;
-      this._data_by_location.data.offset = `${
+      this._data_by_location.data.offset.hours = `${
         this._data_by_location.data.time.includes("PM")
           ? Number(this._data_by_location.data.time.split(":")[0]) +
             12 -
@@ -85,6 +85,11 @@ export class Today {
           : Number(this._data_by_location.data.time.split(":")[0]) -
             new Date().getUTCHours()
       }`;
+      this._data_by_location.data.offset.minutes = `${
+        Number(this._data_by_location.data.time.split(":")[1].split(" ")[0]) -
+        new Date().getUTCMinutes()
+      }
+      `;
       setToday(this._data_by_location);
     }
   };

@@ -1,4 +1,8 @@
 //Today types
+export type offsetType = {
+    hours: string,
+    minutes: string
+}
 
 export type locationsType = {
     search_parameter: string,
@@ -9,7 +13,7 @@ export type locationsType = {
 export type todayType = {
     title: string,
     time: string,
-    offset: string,
+    offset: offsetType,
     date: Date,
     temp: string,
     real_feel: string,
