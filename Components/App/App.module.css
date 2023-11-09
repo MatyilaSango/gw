@@ -2,6 +2,7 @@
   display: flex;
   position: relative;
   width: 100vw;
+  max-width: 1280px;
   height: 100vh;
 }
 
@@ -21,12 +22,14 @@
   overflow-y: scroll;
 }
 
+.components-container::-webkit-scrollbar{
+  display: none;
+}
+
 .components-container-top {
   width: 100%;
   height: 300px;
   display: flex;
-  background-color: #ffffff30;
-  padding: 20px 10px;
 }
 
 .components-container-top__hourly {
@@ -207,7 +210,7 @@
   justify-content: center;
   margin: 0 10px 10px 0;
   min-width: 400px;
-  
+
 }
 
 
