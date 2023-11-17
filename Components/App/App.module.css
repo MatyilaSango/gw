@@ -210,11 +210,13 @@
   justify-content: center;
   margin: 0 10px 10px 0;
   min-width: 400px;
-
 }
 
 
 @media screen and (max-width: 700px) {
+  .components-container{
+    padding: 70px 0;
+  }
   .components-container-top {
     flex-direction: column;
     justify-content: center;
@@ -235,6 +237,7 @@
   .components-container-bottom-nav__text {
     width: 150px;
     font-size: 18px;
+    padding-left: 10px;
   }
 
   .components-container-bottom-nav__options {
@@ -243,6 +246,7 @@
 
   .components-container-top__hourly {
     padding-left: 0;
+    max-height: 150px;
   }
 
   .components-container-top__hourly--left_arrow,
@@ -254,5 +258,23 @@
     width: 400px;
     height: 500px;
     overflow: hidden;
+    top: -20px;
+    margin: 0;
+  }
+
+  .App__Calender-wrapper_map{
+    top: -110px;
+  }
+
+  .Calender-map-wrapper{
+    padding: 0;
+    min-width: 360px;
+    height: 850px;
+    justify-content: center;
+  }
+
+  .components-container-bottom{
+    position: relative;
+    scale: 0.9;
   }
 }

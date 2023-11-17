@@ -55,8 +55,9 @@
 
 @media screen and (max-width: 700px) {
     .Calender-wrapper {
-        scale: 0.65;
-        position: unset
+        position: relative;
+        transform: scale(0.54);  
+        top: -10px;  
     }
 
     .Calender-wrapper__heading__text,

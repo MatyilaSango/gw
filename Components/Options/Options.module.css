@@ -25,3 +25,9 @@
 .Options-wrapper span:hover {
     color: #000000;
 }
+
+@media screen and (max-width: 700px) {
+    .Options-wrapper{
+        font-size: 18px;
+    }
+}

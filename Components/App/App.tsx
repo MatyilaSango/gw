@@ -160,11 +160,11 @@ function App() {
         />
       </Head>
 
-      <Image src={backgroundPic} className={styles["App-img"]} alt="pic" />
+      {backgroundPic ? <Image src={backgroundPic} className={styles["App-img"]} alt="pic" /> : ""}
 
       {search ? (<div
         className={styles["components-container"]}
-        id="components-container "
+        id="components-container"
       >
         <div className={styles["components-container-top"]}>
           {todayData && (
@@ -292,10 +292,9 @@ function App() {
           <div className={styles["App__Calender-wrapper"]}>
             <Calender month={monthlyData?.month} year={monthlyData?.year} data={monthlyData?.data} />
           </div>
-          <div className={styles["App__Calender-wrapper"]}>
+          <div className={`${styles["App__Calender-wrapper"]} ${styles["App__Calender-wrapper_map"]}`}>
             <WeatherMap latitude={ipData.latitude} longitude={ipData.longitude} />
           </div>
-
         </div>
 
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />

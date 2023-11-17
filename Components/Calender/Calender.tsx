@@ -20,8 +20,8 @@ export default function Calender({
         </div>
       </div>
       <div className={styles["Calender-wrapper__days"]}>
-        {weekDays.map((day) => (
-          <div className={styles["Calender-wrapper__days-day"]}>{day}</div>
+        {weekDays.map((day, indx) => (
+          <div key={indx} className={styles["Calender-wrapper__days-day"]}>{day}</div>
         ))}
       </div>
       <div className={styles["Calender-wrapper__days-container"]}>
@@ -30,6 +30,7 @@ export default function Calender({
           dateForThisData.setDate(Number(monthData.day))
 
           return <Day
+          key={indx}
             day={monthData.day}
             icon={monthData.icon}
             temperature={monthData.temperature}

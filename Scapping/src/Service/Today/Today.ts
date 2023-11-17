@@ -86,7 +86,7 @@ export class Today {
             new Date().getUTCHours()
       }`;
       this._data_by_location.data.offset.minutes = `${
-        Number(this._data_by_location.data.time.split(":")[1].split(" ")[0]) -
+        Number(this._data_by_location.data.time.split(":")[1]?.split(" ")[0]) -
         new Date().getUTCMinutes()
       }
       `;

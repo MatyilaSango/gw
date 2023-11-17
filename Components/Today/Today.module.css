@@ -205,7 +205,8 @@
 @media screen and (max-width: 700px) {
     .today-wrapper{
         position: relative;
-        left: 50%;
-        transform: translateX(-50%);
+        left: 52.5%;
+        transform: translateX(-55%);
+        scale: 0.95;
     }
 }

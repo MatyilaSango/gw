@@ -1,8 +1,11 @@
 .WeatherMap-wrapper{
     border-radius: 20px;
     overflow: hidden;
+    position: relative;
 }
 
 @media screen and (max-width: 1050px){
-    
+    .WeatherMap-wrapper{
+        transform: scale(0.8);  
+    }
 }
