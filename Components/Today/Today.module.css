@@ -208,5 +208,6 @@
         left: 52.5%;
         transform: translateX(-55%);
         scale: 0.95;
+        height: 300px;
     }
 }
