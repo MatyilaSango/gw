@@ -25,6 +25,7 @@ export default function Today({
   const [locations, setLocations] = useState<locationsType>();
   let inputRef = useRef<String | any>();
   const [time, setTime] = useState<Date>();
+  let searchTimeDelay: NodeJS.Timeout;
 
   useEffect(() => {
     const timeInterval = setInterval(async () => {
@@ -52,32 +53,37 @@ export default function Today({
     };
   }, [time]);
 
-  const handleSearch = async (e: any): Promise<void> => {
-    const inpitValue: string = e.target.value;
-    if (inpitValue === "") return;
-    try {
-      document
-        .querySelector(`.${appStyles["loading-wrapper"]}`)
-        ?.classList.remove(`${appStyles["loading-wrapper__hide"]}`);
-
-      let res: locationsType = await locationsHandler(inpitValue);
-
-      if (res.hasOwnProperty("available_locations")) {
-        document
-          .querySelector(`.${styles["today-wrapper__input-search__search"]}`)
-          ?.classList.remove(`${styles["removeLocations"]}`);
-        setLocations(res);
+  const handleSearch = (e: any): void => {
+    const inputValue: string = e.target.value;
+    if (inputValue === "") return;
+    clearTimeout(searchTimeDelay)
+    searchTimeDelay = setTimeout(async () => {
+      console.log(inputValue)
+      try {
         document
           .querySelector(`.${appStyles["loading-wrapper"]}`)
-          ?.classList.add(`${appStyles["loading-wrapper__hide"]}`);
-      } else {
-        handleSetSearch(inpitValue);
+          ?.classList.remove(`${appStyles["loading-wrapper__hide"]}`);
+  
+        let res: locationsType = await locationsHandler(inputValue);
+  
+        if (res.hasOwnProperty("available_locations")) {
+          document
+            .querySelector(`.${styles["today-wrapper__input-search__search"]}`)
+            ?.classList.remove(`${styles["removeLocations"]}`);
+          setLocations(res);
+          document
+            .querySelector(`.${appStyles["loading-wrapper"]}`)
+            ?.classList.add(`${appStyles["loading-wrapper__hide"]}`);
+        } else {
+          handleSetSearch(inputValue);
+        }
+  
+        inputRef.current = "";
+      } catch {
+        alert("No such locations found!");
       }
-
-      inputRef.current = "";
-    } catch {
-      alert("No such locations found!");
-    }
+    }, 2000)
+    
   };
 
   return (
