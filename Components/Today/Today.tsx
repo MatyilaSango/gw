@@ -58,7 +58,6 @@ export default function Today({
     if (inputValue === "") return;
     clearTimeout(searchTimeDelay)
     searchTimeDelay = setTimeout(async () => {
-      console.log(inputValue)
       try {
         document
           .querySelector(`.${appStyles["loading-wrapper"]}`)
