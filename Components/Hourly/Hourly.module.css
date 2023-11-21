@@ -1,7 +1,6 @@
 .Hourly-Wrapper {
     height: 100%;
     width: 150px;
-    
     background-color: #00000050;
     border-radius: 20px;
     padding: 30px;
@@ -38,12 +37,23 @@
     flex-flow: row wrap;
 }
 
+.iscanvas{
+    position: relative;
+    top: -180px;
+
+    .Hourly-Wrapper__type {
+        position: relative;
+        top: -15px;
+    }
+}
+
 .Hourly-Wrapper__icon_type__img {
     height: 50%;
     width: auto;
     -webkit-filter: drop-shadow(0px 6px 2px #000000);
     filter: drop-shadow(0px 6px 2px #000000);
 }
+
 
 .Hourly-Wrapper__type {
     font-size: 15px;
