@@ -10,7 +10,7 @@ interface IsearchOption {
 export default function SearchOption({ location, handleSetSearch }: IsearchOption) {
 
   const handleOptionClick = (e: MouseEvent<HTMLParagraphElement>): void => {
-    const geoData = location.link.replace("https://www.accuweather.com/web-api/three-day-redirect?key=GEO_", "").split("&")[0].split("%2c")
+    const geoData = location.link.replace("/web-api/three-day-redirect?key=GEO_", "").split("&")[0].split("%2c")
     handleSetSearch({city: location.location, geo: {long: geoData[0], lat: geoData[1]}})
   }
 
