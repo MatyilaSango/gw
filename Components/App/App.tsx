@@ -14,6 +14,7 @@ import {
   hourlydataType,
   monthlyWeatherData,
   todayDataType,
+  searchDataType
 } from "../../Types/types";
 import Hourly from "../Hourly/Hourly";
 import Options from "../Options/Options";
@@ -34,7 +35,7 @@ let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
 function App() {
-  const [search, setSearch] = useState<{city: string, geo: {lat: number, long: number}}>();
+  const [search, setSearch] = useState<searchDataType>();
   const [ipData, setIpData] = useState<any>()
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
@@ -112,8 +113,8 @@ function App() {
     }
   }, [dailyData])
 
-  const handleSetSearch = (parameter: string): void => {
-    setSearch(parameter.trim());
+  const handleSetSearch = (parameter: searchDataType): void => {
+    setSearch(parameter);
     setDailyData(undefined);
     setMonthlyData(undefined)
     setreRender(true);

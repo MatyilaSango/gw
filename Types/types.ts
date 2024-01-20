@@ -1,13 +1,20 @@
 //Today types
+export type searchDataType = {city: string, geo: {lat: string, long: string}}
+
 export type offsetType = {
     hours: string,
     minutes: string
 }
 
+export type searchLocationType = {
+    location: string,
+    link: string
+}
+
 export type locationsType = {
     search_parameter: string,
     weather_site: string,
-    available_locations: string[]
+    available_locations: searchLocationType[]
 }
 
 export type todayType = {

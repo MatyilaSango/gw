@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { locationsType, todayType } from "../../Types/types";
+import { locationsType, searchDataType, todayType } from "../../Types/types";
 import styles from "./Today.module.css";
 import appStyles from "../App/App.module.css";
 import SearchOption from "../SearchOptions/SearchOption";
@@ -8,7 +8,7 @@ import locationsHandler from "../../Scapping/src/Controller/Location/Location";
 interface ITodayProps {
   data: todayType;
   search: String;
-  handleSetSearch: (parameter: string) => void;
+  handleSetSearch: (parameter: searchDataType) => void;
   setBackgroundPic: (value: React.SetStateAction<string>) => void;
   wallpaper: string;
   wallpaperNight: string;
@@ -73,9 +73,10 @@ export default function Today({
           document
             .querySelector(`.${appStyles["loading-wrapper"]}`)
             ?.classList.add(`${appStyles["loading-wrapper__hide"]}`);
-        } else {
-          handleSetSearch(inputValue);
-        }
+        } 
+        // else {
+        //   handleSetSearch(inputValue);
+        // }
   
         inputRef.current = "";
       } catch {
@@ -100,7 +101,7 @@ export default function Today({
             ? locations?.available_locations.map((location, i) => (
               <SearchOption
                 key={i}
-                location={String(location)}
+                location={location}
                 handleSetSearch={handleSetSearch}
               />
             ))
