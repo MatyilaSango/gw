@@ -87,7 +87,7 @@ function App() {
       })
 
       Promise.all([todayPromise, hourlyPromise, dailyPromise, monthlyPromise]) // To do add monthly promise
-      document.title = "GW-Weather | " + search;
+      document.title = "GW-Weather | " + search.city;
     }
   }, [search]);
 
