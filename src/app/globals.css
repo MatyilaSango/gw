@@ -86,6 +86,9 @@ body {
       background-image: radial-gradient(#09021B, #09021B80);
   display: flex;
   justify-content: center;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
 }
 
 a {

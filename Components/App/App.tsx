@@ -113,6 +113,10 @@ function App() {
     }
   }, [dailyData])
 
+  useEffect(() => {
+    if(backgroundPic) document.body.style.backgroundImage = `url(${(backgroundPic as any).default.src})`
+  }, [backgroundPic])
+
   const handleSetSearch = (parameter: searchDataType): void => {
     setSearch(parameter);
     setDailyData(undefined);
@@ -161,7 +165,7 @@ function App() {
         />
       </Head>
 
-      {backgroundPic ? <Image src={backgroundPic} className={styles["App-img"]} alt="pic" /> : ""}
+      {/* {backgroundPic ? <Image src={backgroundPic} className={styles["App-img"]} alt="pic" /> : ""} */}
 
       {search ? (<div
         className={styles["components-container"]}
