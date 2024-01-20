@@ -34,7 +34,7 @@ let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
 function App() {
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<{city: string, geo: {lat: number, long: number}}>();
   const [ipData, setIpData] = useState<any>()
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
@@ -53,7 +53,7 @@ function App() {
       const getMyLocation = async (): Promise<void> => {
         const ipdata = await (await fetch("https://surfshark.com/api/v1/server/user")).json()
         const data = await (await fetch(`https://ipapi.co/${await ipdata.ip}/json/`)).json()
-        setSearch(`${data.city}, ${data.region}, ${data.country}`)
+        setSearch(prev => prev = {city: data.city, geo: {lat: data.latitude, long: data.longitude}})
         setIpData(data)
       }
       getMyLocation()
@@ -62,25 +62,25 @@ function App() {
 
   useEffect(() => {
     if (reRender && search) {
-      const _rootPage = getRootHTMLPage(search)
+      const _rootPage = getRootHTMLPage(search.city, search.geo)
       setRootPage(prev => prev = _rootPage)
 
       const todayPromise = new Promise((reslove, reject) => {
-        reslove(todayHandler(search, _rootPage).then((res) => setTodayData(res as todayDataType)))
+        reslove(todayHandler(search.city, _rootPage).then((res) => setTodayData(res as todayDataType)))
       })
 
       const hourlyPromise = new Promise((reslove, reject) => {
-        reslove(hourlyHandler(search, _rootPage).then((res) => setHourlyData(res as hourlyDataType)))
+        reslove(hourlyHandler(search.city, _rootPage).then((res) => setHourlyData(res as hourlyDataType)))
       })
 
       const dailyPromise = new Promise((reslove, reject) => {
-        reslove(dailyHandler(search, dailyOption, _rootPage).then((res) =>
+        reslove(dailyHandler(search.city, dailyOption, _rootPage).then((res) =>
           setDailyData(res as dailyDataType)
         ))
       })
 
       const monthlyPromise = new Promise((reslove, reject) => {
-        reslove(monthlyHandler(search, _rootPage).then((res) =>
+        reslove(monthlyHandler(search.city, _rootPage).then((res) =>
           setMonthlyData(res as monthlyWeatherData)
         ))
       })
@@ -92,7 +92,7 @@ function App() {
 
   useEffect(() => {
     if (rootPage && search) {
-      dailyHandler(search, dailyOption, rootPage as Promise<any>).then((res) =>
+      dailyHandler(search.city, dailyOption, rootPage as Promise<any>).then((res) =>
         setDailyData(res as dailyDataType)
       );
     }
