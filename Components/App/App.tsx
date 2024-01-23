@@ -119,6 +119,7 @@ function App() {
 
   const handleSetSearch = (parameter: searchDataType): void => {
     setSearch(parameter);
+    setIpData({...ipData, latitude: parameter.geo.lat, longitude: parameter.geo.long})
     setDailyData(undefined);
     setMonthlyData(undefined)
     setreRender(true);
