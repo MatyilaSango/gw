@@ -44,7 +44,6 @@ export class Today {
         .text()
         .trim();
       this._data_by_location.data.type = $(".cur-con-weather-card")
-        .find(".spaced-content")
         .find(".phrase")
         .text();
 
@@ -53,7 +52,6 @@ export class Today {
         <string>$(".cur-con-weather-card").find(".weather-icon").data("src");
 
       $(".cur-con-weather-card")
-        .find(".details-container")
         .find(".spaced-content")
         .each(function (this: any) {
           switch ($(this).find(".label").text()) {
@@ -61,19 +59,23 @@ export class Today {
               that._data_by_location.data.real_feel = $(this)
                 .find(".value")
                 .text();
+              break;
 
-            case "air Quality":
+            case "Air Quality":
               that._data_by_location.data.air_quality = $(this)
                 .find(".value")
                 .text();
+              break;
 
             case "Wind":
               that._data_by_location.data.wind = $(this).find(".value").text();
+              break;
 
             case "Wind Gusts":
               that._data_by_location.data.wind_gusts = $(this)
                 .find(".value")
                 .text();
+              break;
           }
         });
       this._data_by_location.search_parameter = search;
