@@ -1,22 +1,20 @@
 import React, { MouseEvent } from 'react'
 import styles from "./SearchOption.module.css"
-import { searchDataType, searchLocationType } from '../../Types/types'
+import { searchDataType } from '../../Types/types'
 
 interface IsearchOption {
-  location: searchLocationType,
+  location: searchDataType,
   handleSetSearch: (parameter: searchDataType) => void
 }
 
 export default function SearchOption({ location, handleSetSearch }: IsearchOption) {
-
   const handleOptionClick = (e: MouseEvent<HTMLParagraphElement>): void => {
-    const geoData = location.link.replace("/web-api/three-day-redirect?key=GEO_", "").split("&")[0].split("%2c")
-    handleSetSearch({city: location.location, geo: {long: geoData[0], lat: geoData[1]}})
+    handleSetSearch({city: location.city, geo: location.geo})
   }
 
   return (
     <div className={styles['search-option-wrapper']}>
-      <p onClick={handleOptionClick}>{location.location}</p>
+      <p onClick={handleOptionClick}>{location.city}</p>
     </div>
   )
 }

@@ -14,7 +14,7 @@ export type searchLocationType = {
 export type locationsType = {
     search_parameter: string,
     weather_site: string,
-    available_locations: searchLocationType[]
+    available_locations: searchDataType[]
 }
 
 export type todayType = {
