@@ -18,7 +18,7 @@ export class Locations {
     classThis._locations.available_locations = []
       $(".locations-list a").each(function(this){
         const link = ($(this).attr("href") as string).toString()
-        const geoData = link.replace("/web-api/three-day-redirect?key=GEO_", "").split("&")[0].split("%2c")
+        const geoData = link.replace("/web-api/three-day-redirect?key=GEO_", "").split("&")[0].replaceAll("%2E", ".").split("%2c")
         classThis._locations.available_locations.push({city: $(this).find(".location-name").text().trim(), geo: {long: geoData[0], lat: geoData[1]}})
       })
   };
