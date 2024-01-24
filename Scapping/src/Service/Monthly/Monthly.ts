@@ -77,21 +77,18 @@ export class Month {
 
       $(".monthly-daypanel").each(function (this) {
         let tempData: monthlyData = {
-          day: "",
+          day: $(this).find(".date").text().trim(),
           icon: "",
           temperature: {
-            high: "",
-            low: "",
+            high: $(this).find(".high").text().trim(),
+            low: $(this).find(".low").text().trim(),
           },
         };
 
-        tempData.day = $(this).find(".date").text().trim();
         tempData.icon = $(this).find(".icon-container").find("svg").data("src")
           ? "https://www.accuweather.com" +
             <string>$(this).find(".icon-container").find("svg").data("src")
           : "";
-        tempData.temperature.high = $(this).find(".high").text().trim();
-        tempData.temperature.low = $(this).find(".low").text().trim();
 
         that._monthlyData.data.push(tempData);
       });

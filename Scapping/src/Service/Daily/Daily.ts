@@ -68,11 +68,11 @@ export class Daily {
       //Scrapping the day and night data.
       $(".half-day-card").each(function (this: any) {
         let tempDayNightData: dataType = {
-          title: "",
-          temperature: "",
-          real_feel: "",
-          real_feel_shade: "",
-          phrase: "",
+          title: $(this).find(".title").text().trim(),
+          temperature: String($(this).find(".temperature").text()).trim(),
+          real_feel: $(this).find(".real-feel").text().split("\n")[3].trim(),
+          real_feel_shade: String($(this).find(".realfeel-shade-details").text().split("\n")[3]).trim(),
+          phrase: $(this).find(".phrase").text().trim(),
           max_uv_index: "",
           wind: "",
           wind_gusts: "",
@@ -80,25 +80,8 @@ export class Daily {
           prob_of_thunderstorm: "",
           precip: "",
           cloud_cover: "",
-          icon: "",
+          icon: "https://www.accuweather.com" + <string>$(this).find("svg").data("src"),
         };
-
-        tempDayNightData.title = $(this).find(".title").text().trim();
-        tempDayNightData.temperature = String(
-          $(this).find(".temperature").text()
-        ).trim();
-        tempDayNightData.real_feel = $(this)
-          .find(".real-feel")
-          .text()
-          .split("\n")[3]
-          .trim();
-        tempDayNightData.real_feel_shade = String(
-          $(this).find(".realfeel-shade-details").text().split("\n")[3]
-        ).trim();
-        tempDayNightData.phrase = $(this).find(".phrase").text().trim();
-        tempDayNightData.icon =
-          "https://www.accuweather.com" +
-          <string>$(this).find("svg").data("src");
 
         that._dailyData.date = $(this).find(".short-date").text().trim();
 
@@ -216,22 +199,11 @@ export class Daily {
 
       let tempHighLowList: highLowType[] = [];
 
-      $(".temp-history")
-        .find(".row")
-        .each(function (this: any) {
-          let tempHighLowData: highLowType = {
-            high: "",
-            low: "",
-          };
-          tempHighLowData.high = $(this)
-            .find(".temperature:nth-child(2)")
-            .text()
-            .trim();
-          tempHighLowData.low = $(this)
-            .find(".temperature:nth-child(3)")
-            .text()
-            .trim();
-          tempHighLowList.push(tempHighLowData);
+      $(".temp-history").find(".row").each(function (this: any) {
+          tempHighLowList.push({
+            high: $(this).find(".temperature:nth-child(2)").text().trim(),
+            low: $(this).find(".temperature:nth-child(3)").text().trim(),
+          });
         });
 
       let TemperatureHistory: temperature_historyType = {

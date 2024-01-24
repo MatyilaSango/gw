@@ -51,14 +51,12 @@ export class Hourly {
 
       that._hourlyData.data = [];
 
-      $(".hourly-wrapper")
-        .find(".accordion-item")
-        .each(function (this: any) {
+      $(".hourly-wrapper").find(".accordion-item").each(function (this: any) {
           let tempHourlyData: hourlydataType = {
-            hour: "",
-            temp: "",
-            precip: "",
-            type: "",
+            hour: $(this).find(".hourly-card-top").find(".date").text(),
+            temp: $(this).find(".hourly-card-top").find(".temp").text(),
+            precip: $(this).find(".hourly-card-top").find(".precip").text().trim(),
+            type: $(this).find(".phrase").text(),
             real_feel: "",
             real_feel_shade: "",
             max_uv_index: "",
@@ -71,30 +69,10 @@ export class Hourly {
             cloudy_cover: "",
             visibility: "",
             cloud_ceiling: "",
-            icon: "",
+            icon: "https://www.accuweather.com" + <string>$(this).find(".hourly-card-top").find("svg").data("src"),
           };
 
-          tempHourlyData.hour = $(this)
-            .find(".hourly-card-top")
-            .find(".date")
-            .text();
-          tempHourlyData.temp = $(this)
-            .find(".hourly-card-top")
-            .find(".temp")
-            .text();
-          tempHourlyData.precip = $(this)
-            .find(".hourly-card-top")
-            .find(".precip")
-            .text()
-            .trim();
-          tempHourlyData.type = $(this).find(".phrase").text();
-          tempHourlyData.icon =
-            "https://www.accuweather.com" +
-            <string>$(this).find(".hourly-card-top").find("svg").data("src");
-
-          $(this)
-            .find(`.panel`)
-            .each(function (this) {
+          $(this).find(`.panel`).each(function (this) {
               let next_child: number = 1;
               while (next_child <= 12) {
                 let tempdata: string = $(this)
