@@ -103,6 +103,8 @@
 
 .sunrise-sunset-wrapper {
   height: fit-content;
+  background-color: #fffdfd50;
+  padding: 10px;
 }
 
 .temperature-history-wrapper {
