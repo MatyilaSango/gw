@@ -1,6 +1,5 @@
 .sunrise-sunset-wrapper-card {
-    width: 300px;    
-    margin-bottom: 20px;
+    width: 100%;    
     color: black;
 }
 
@@ -11,4 +10,10 @@
     font-size: 22px;
     font-weight: 500;
     text-shadow: 0px 5px 7px #00000090;
+}
+
+@media screen and (max-width: 700px) {
+    .sunrise-sunset-wrapper-card{
+        width: 100%;
+    }
 }

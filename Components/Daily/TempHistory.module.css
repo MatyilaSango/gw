@@ -1,4 +1,10 @@
 .temp-history-wrapper{
     color: black;
-    width: 300px; 
+    width: 100%;
+}
+
+@media screen and (max-width: 700px) {
+    .temp-history-wrapper {
+        width: 100%;
+    }
 }

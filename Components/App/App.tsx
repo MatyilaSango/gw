@@ -237,9 +237,7 @@ function App() {
               <div className={styles["components-container-bottom-nav__text"]}>
                 <span>Daily Weather</span>
               </div>
-              <div
-                className={styles["components-container-bottom-nav__options"]}
-              >
+              <div className={styles["components-container-bottom-nav__options"]}>
                 <Options
                   handleSetDailyOption={handleSetDailyOption}
                   offsetHours={Number(todayData?.data.offset.hours)}
@@ -298,9 +296,20 @@ function App() {
           <div className={styles["App__Calender-wrapper"]}>
             <Calender month={monthlyData?.month} year={monthlyData?.year} data={monthlyData?.data} />
           </div>
-          <div className={`${styles["App__Calender-wrapper"]} ${styles["App__Calender-wrapper_map"]}`}>
-            <WeatherMap latitude={ipData.latitude} longitude={ipData.longitude} />
+        </div>
+
+        <div className={`${styles["Calender-map-wrapper"]} ${styles["Map-wrapper"]}`}>
+          <div className={`${styles["components-container-bottom-nav"]} ${styles["Map-wrapper__nav"]}`}>
+            <div className={styles["components-container-bottom-nav__text"]}>
+              <span>Weather Map</span>
+            </div>
           </div>
+          <div className= {styles["Map-wrapper__body"]}>
+            <div className={`${styles["App__Calender-wrapper"]} ${styles["App__Calender-wrapper_map"]}`}>
+              <WeatherMap latitude={ipData.latitude} longitude={ipData.longitude} />
+            </div>
+          </div>
+          
         </div>
 
         <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />

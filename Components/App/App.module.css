@@ -102,17 +102,21 @@
 }
 
 .sunrise-sunset-wrapper {
+  width: 450px;
   height: fit-content;
   background-color: #fffdfd50;
   padding: 10px;
+  margin: 0 20px 20px 0;
+  
 }
 
 .temperature-history-wrapper {
+  width: 450px;
   height: fit-content;
   background-color: #fffdfd50;
   padding: 10px;
-  margin: 0 0 0 20px;
   color: black;
+  margin: 0 20px 20px 0;
 }
 
 .temperature-history-wrapper__top {
@@ -213,6 +217,15 @@
   min-width: 400px;
 }
 
+.Map-wrapper{
+  display: block;
+  padding: 0;
+}
+
+.Map-wrapper__nav{
+  margin-bottom: 20px;
+}
+
 
 @media screen and (max-width: 700px) {
   .components-container{
@@ -270,7 +283,7 @@
   .Calender-map-wrapper{
     padding: 0;
     min-width: 360px;
-    height: 850px;
+    height: 450px;
     justify-content: center;
   }
 
@@ -281,11 +294,22 @@
   }
 
   .sunrise-sunset-wrapper{
-    margin-bottom: 10px;
+    margin: 0 0 20px 0;
+    width: 100%;
   }
 
   .temperature-history-wrapper{
-    width: auto;
+    width: 100%;
     margin: 0;
+  }
+
+  .components-container-bottom-dnsstal{
+    padding: 10px 0;
+  }
+
+  .Map-wrapper__body{
+    display: flex;
+    justify-content: center;
+    height: fit-content;
   }
 }
