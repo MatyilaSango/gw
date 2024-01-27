@@ -66,84 +66,156 @@ export class Daily {
       let $ = cheerio.load(hourlyresponse);
 
       //Scrapping the day and night data.
-      $(".half-day-card").each(function (this: any) {
-        let tempDayNightData: dataType = {
-          title: $(this).find(".title").text().trim(),
-          temperature: String($(this).find(".temperature").text()).trim(),
-          real_feel: $(this).find(".real-feel").text().split("\n")[3].trim(),
-          real_feel_shade: String($(this).find(".realfeel-shade-details").text().split("\n")[3]).trim(),
-          phrase: $(this).find(".phrase").text().trim(),
-          max_uv_index: "",
-          wind: "",
-          wind_gusts: "",
-          prob_of_precip: "",
-          prob_of_thunderstorm: "",
-          precip: "",
-          cloud_cover: "",
-          icon: "https://www.accuweather.com" + <string>$(this).find("svg").data("src"),
-        };
+      if (document.body.clientWidth > 800) {
+        $(".half-day-card").each(function (this: any) {
+          let tempDayNightData: dataType = {
+            title: $(this).find(".title").text().trim(),
+            temperature: String($(this).find(".temperature").text()).trim(),
+            real_feel: $(this).find(".real-feel").text().split("\n")[3].trim(),
+            real_feel_shade: String($(this).find(".realfeel-shade-details").text().split("\n")[3]).trim(),
+            phrase: $(this).find(".phrase").text().trim(),
+            max_uv_index: "",
+            wind: "",
+            wind_gusts: "",
+            prob_of_precip: "",
+            prob_of_thunderstorm: "",
+            precip: "",
+            cloud_cover: "",
+            icon:
+              "https://www.accuweather.com" +
+              <string>$(this).find("svg").data("src"),
+          };
 
-        that._dailyData.date = $(this).find(".short-date").text().trim();
+          that._dailyData.date = $(this).find(".short-date").text().trim();
 
-        for (let next_child = 1; next_child <= 4; next_child++) {
-          let tempPanelData: string = $(this)
-            .find(`.left .panel-item:nth-child(${next_child})`)
-            .text()
-            .trim();
-          if (tempPanelData.includes("Max UV Index")) {
-            tempDayNightData.max_uv_index = $(this)
-              .find(`.left .panel-item:nth-child(${next_child}) .value`)
+          for (let next_child = 1; next_child <= 4; next_child++) {
+            let tempPanelData: string = $(this)
+              .find(`.left .panel-item:nth-child(${next_child})`)
               .text()
               .trim();
-            continue;
-          } else if (tempPanelData.includes("Gusts")) {
-            tempDayNightData.wind_gusts = $(this)
-              .find(`.left .panel-item:nth-child(${next_child}) .value`)
-              .text()
-              .trim();
-            continue;
-          } else if (tempPanelData.includes("Wind")) {
-            tempDayNightData.wind = $(this)
-              .find(`.left .panel-item:nth-child(${next_child}) .value`)
-              .text()
-              .trim();
-            continue;
-          } else if (tempPanelData.includes("Probability")) {
-            tempDayNightData.prob_of_precip = $(this)
-              .find(`.left .panel-item:nth-child(${next_child}) .value`)
-              .text()
-              .trim();
-            continue;
+            if (tempPanelData.includes("Max UV Index")) {
+              tempDayNightData.max_uv_index = $(this)
+                .find(`.left .panel-item:nth-child(${next_child}) .value`)
+                .text()
+                .trim();
+              continue;
+            } else if (tempPanelData.includes("Gusts")) {
+              tempDayNightData.wind_gusts = $(this)
+                .find(`.left .panel-item:nth-child(${next_child}) .value`)
+                .text()
+                .trim();
+              continue;
+            } else if (tempPanelData.includes("Wind")) {
+              tempDayNightData.wind = $(this)
+                .find(`.left .panel-item:nth-child(${next_child}) .value`)
+                .text()
+                .trim();
+              continue;
+            } else if (tempPanelData.includes("Probability")) {
+              tempDayNightData.prob_of_precip = $(this)
+                .find(`.left .panel-item:nth-child(${next_child}) .value`)
+                .text()
+                .trim();
+              continue;
+            }
           }
-        }
 
-        for (let next_child = 1; next_child <= 3; next_child++) {
-          let tempPanelData: string = $(this)
-            .find(`.right .panel-item:nth-child(${next_child})`)
-            .text()
-            .trim();
-          if (tempPanelData.includes("Probability")) {
-            tempDayNightData.prob_of_thunderstorm = $(this)
-              .find(`.right .panel-item:nth-child(${next_child}) .value`)
+          for (let next_child = 1; next_child <= 3; next_child++) {
+            let tempPanelData: string = $(this)
+              .find(`.right .panel-item:nth-child(${next_child})`)
               .text()
               .trim();
-            continue;
-          } else if (tempPanelData.includes("Precipitation")) {
-            tempDayNightData.precip = $(this)
-              .find(`.right .panel-item:nth-child(${next_child}) .value`)
-              .text()
-              .trim();
-            continue;
-          } else if (tempPanelData.includes("Cloud")) {
-            tempDayNightData.cloud_cover = $(this)
-              .find(`.right .panel-item:nth-child(${next_child}) .value`)
-              .text()
-              .trim();
-            continue;
+            if (tempPanelData.includes("Probability")) {
+              tempDayNightData.prob_of_thunderstorm = $(this)
+                .find(`.right .panel-item:nth-child(${next_child}) .value`)
+                .text()
+                .trim();
+              continue;
+            } else if (tempPanelData.includes("Precipitation")) {
+              tempDayNightData.precip = $(this)
+                .find(`.right .panel-item:nth-child(${next_child}) .value`)
+                .text()
+                .trim();
+              continue;
+            } else if (tempPanelData.includes("Cloud")) {
+              tempDayNightData.cloud_cover = $(this)
+                .find(`.right .panel-item:nth-child(${next_child}) .value`)
+                .text()
+                .trim();
+              continue;
+            }
           }
-        }
-        tempDayNightList.push(tempDayNightData);
-      });
+          tempDayNightList.push(tempDayNightData);
+        });
+
+      } else {
+
+        $(".half-day-card-nfl").each(function (this: any) {
+          let tempDayNightData: dataType = {
+            title: $(this).find(".title").text().trim(),
+            temperature: String($(this).find(".temperature").text()).trim(),
+            real_feel: "",
+            real_feel_shade: "",
+            phrase: "",
+            max_uv_index: "",
+            wind: "",
+            wind_gusts: "",
+            prob_of_precip: "",
+            prob_of_thunderstorm: "",
+            precip: "",
+            cloud_cover: "",
+            icon:
+              "https://www.accuweather.com" +
+              <string>$(this).find("svg").data("src"),
+          };
+
+          $(this).find(".panel-item").each(function (this) {
+              const panelItemText = $(this).text().trim();
+              if (panelItemText.includes("RealFeel Shade")) {
+                tempDayNightData.real_feel_shade = $(this)
+                  .find(".value")
+                  .text()
+                  .trim();
+              } else if (panelItemText.includes("RealFeel")) {
+                tempDayNightData.real_feel = $(this)
+                  .find(".value")
+                  .text()
+                  .trim();
+              } else if (panelItemText.includes("Max UV Index")) {
+                tempDayNightData.max_uv_index = $(this)
+                  .find(".value")
+                  .text()
+                  .trim();
+              } else if (panelItemText.includes("Wind Gusts")) {
+                tempDayNightData.wind_gusts = $(this)
+                  .find(".value")
+                  .text()
+                  .trim();
+              } else if (panelItemText.includes("Wind")) {
+                tempDayNightData.wind = $(this).find(".value").text().trim();
+              } else if (panelItemText.includes("Probability of Precipitation")) {
+                tempDayNightData.prob_of_precip = $(this)
+                  .find(".value")
+                  .text()
+                  .trim();
+              } else if (panelItemText.includes("Probability of Thunderstorms")) {
+                tempDayNightData.prob_of_thunderstorm = $(this)
+                  .find(".value")
+                  .text()
+                  .trim();
+              } else if (panelItemText.includes("Precipitation")) {
+                tempDayNightData.precip = $(this).find(".value").text().trim();
+              } else if (panelItemText.includes("Cloud Cover")) {
+                tempDayNightData.cloud_cover = $(this)
+                  .find(".value")
+                  .text()
+                  .trim();
+              }
+            });
+
+          tempDayNightList.push(tempDayNightData);
+        });
+      }
 
       let day_night_data: dayNightType = {
         day: tempDayNightList[0],
@@ -199,7 +271,9 @@ export class Daily {
 
       let tempHighLowList: highLowType[] = [];
 
-      $(".temp-history").find(".row").each(function (this: any) {
+      $(".temp-history")
+        .find(".row")
+        .each(function (this: any) {
           tempHighLowList.push({
             high: $(this).find(".temperature:nth-child(2)").text().trim(),
             low: $(this).find(".temperature:nth-child(3)").text().trim(),
