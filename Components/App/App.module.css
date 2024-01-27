@@ -285,12 +285,13 @@
     min-width: 360px;
     height: 450px;
     justify-content: center;
+    margin-top: -30px;
   }
 
   .components-container-bottom{
     position: relative;
     scale: 0.9;
-    margin-top: 0;
+    margin-top: -40px;
   }
 
   .sunrise-sunset-wrapper{
@@ -305,6 +306,10 @@
 
   .components-container-bottom-dnsstal{
     padding: 10px 0;
+  }
+
+  .Map-wrapper{
+    margin-top: 40px;
   }
 
   .Map-wrapper__body{
