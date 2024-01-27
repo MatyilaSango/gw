@@ -109,7 +109,6 @@
 
 .temperature-history-wrapper {
   height: fit-content;
-  width: 250px;
   background-color: #fffdfd50;
   padding: 10px;
   margin: 0 0 0 20px;
@@ -279,5 +278,14 @@
     position: relative;
     scale: 0.9;
     margin-top: 0;
+  }
+
+  .sunrise-sunset-wrapper{
+    margin-bottom: 10px;
+  }
+
+  .temperature-history-wrapper{
+    width: auto;
+    margin: 0;
   }
 }
