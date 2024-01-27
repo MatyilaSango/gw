@@ -206,4 +206,13 @@
         scale: 0.95;
         height: 300px;
     }
+
+    .wind,
+    .air-quality{
+        display: none;
+    }
+
+    .wrapper-weather-bottom-det__det .temp{
+        font-size: 50px;
+    }
 }
