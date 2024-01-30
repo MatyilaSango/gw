@@ -38,8 +38,15 @@
     flex-flow: row wrap;
 }
 
-.Hourly-Wrapper__icon_type__img {
+.Hourly-Wrapper__icon_type_img-wrapper{
+    width: 100%;
     height: 50%;
+    display: flex;
+    justify-content: center;
+}
+
+.Hourly-Wrapper__icon_type__img {
+    height: 100%;
     width: auto;
     -webkit-filter: drop-shadow(0px 6px 2px #000000);
     filter: drop-shadow(0px 6px 2px #000000);
@@ -47,6 +54,7 @@
 
 .Hourly-Wrapper__type {
     font-size: 15px;
+    width: 100%;
 }
 
 .Hourly-Wrapper__type-span {

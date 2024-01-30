@@ -15,7 +15,9 @@ export default function Hourly({id, hour, icon, temp, type, setShowHourlyFullVie
         <span>{hour}</span>
       </div>
       <div className={styles['Hourly-Wrapper__icon_type']}>
-        <img src={icon} className={styles["Hourly-Wrapper__icon_type__img"]} alt="pic" />
+        <div className={styles['Hourly-Wrapper__icon_type_img-wrapper']}>
+          <img src={icon} className={styles["Hourly-Wrapper__icon_type__img"]} alt="pic" />
+        </div>
         <div className={styles["Hourly-Wrapper__type"]}>
           <span className={styles["Hourly-Wrapper__type-span"]}>{type}</span>
         </div>
