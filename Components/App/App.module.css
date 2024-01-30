@@ -18,7 +18,7 @@
   height: 100%;
   left: 0;
   top: 0;
-  padding: 70px 1rem;
+  padding: 0px 1rem;
   overflow-y: scroll;
 }
 
@@ -145,13 +145,21 @@
   position: relative;
 }
 
+.logo-wrapper{
+  display: flex;
+  justify-content: center;
+  padding: 20px 0;
+  width: 100%;
+  background-image: linear-gradient(45deg, #0b131e70, #4726a470);
+  margin-bottom: 20px;
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  box-shadow: 0px 0px 10px 5px #00000050;
+}
+
 .logo {
   height: auto;
   width: 180px;
-  position: absolute;
-  top: 10px;
-  left: 50%;
-  transform: translateX(-50%);
   border-radius: 10px;
   -webkit-filter: drop-shadow(0px 6px 2px #000000);
   filter: drop-shadow(0px 6px 2px #000000);
@@ -228,8 +236,12 @@
 
 
 @media screen and (max-width: 700px) {
+  .logo-wrapper{
+    margin-bottom: 0;
+  }
+
   .components-container{
-    padding: 70px 0;
+    padding: 0px 0.1rem;
   }
   .components-container-top {
     flex-direction: column;
@@ -241,6 +253,10 @@
     width: 100%;
     height: 300px;
     margin-top: 20px;
+  }
+
+  .components-container-top__hourly--data-view::-webkit-scrollbar {
+    display: none;
   }
 
   .components-container-top .today-wrapper {
@@ -266,6 +282,7 @@
   .components-container-top__hourly--left_arrow,
   .components-container-top__hourly--right_arrow {
     display: flex;
+    visibility: hidden;
   }
 
   .App__Calender-wrapper {
@@ -291,7 +308,7 @@
   .components-container-bottom{
     position: relative;
     scale: 0.9;
-    margin-top: -40px;
+    margin-top: -60px;
   }
 
   .sunrise-sunset-wrapper{

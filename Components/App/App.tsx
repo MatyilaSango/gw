@@ -172,6 +172,9 @@ function App() {
         className={styles["components-container"]}
         id="components-container"
       >
+        <div className={styles["logo-wrapper"]}> 
+            <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
+        </div>
         <div className={styles["components-container-top"]}>
           {todayData && (
             <Today
@@ -311,8 +314,7 @@ function App() {
           </div>
           
         </div>
-
-        <Image src={gweatherLogo} alt="logo" className={styles["logo"]} />
+        
       </div>
       ) : (
         ""

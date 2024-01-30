@@ -205,6 +205,7 @@
         transform: translateX(-55%);
         scale: 0.95;
         height: 300px;
+        width: 100%;
     }
 
     .wind,
@@ -214,5 +215,19 @@
 
     .wrapper-weather-bottom-det__det .temp{
         font-size: 50px;
+    }
+
+    .wrapper-weather-bottom-det__pic{
+        justify-content: end;
+    }
+
+    .wrapper-weather-bottom-det__pic img{
+        max-width: 130px;
+    }
+
+    .wrapper-weather-top-det__loc-type .type {
+        font-size: 20px;
+        position: relative;
+        top: 20px;
     }
 }
