@@ -41,11 +41,13 @@ export default class DailyModel {
       },
       sunrise_sunset: {
         sunrise: {
+          icon: "",
           duration: "",
           rise: "",
           set: "",
         },
         sunset: {
+          icon: "",
           duration: "",
           rise: "",
           set: "",
