@@ -229,32 +229,30 @@ export class Daily {
       let tempRiseSetList: sunriseSunsetType[] = [];
 
       $(".sunrise-sunset")
-        .find(".panel")
+        .find(".sunrise-sunset__item")
         .each(function (this: any) {
           let tempRiseSetData: sunriseSunsetType = {
+            icon: "",
             duration: "",
             rise: "",
             set: "",
           };
-          let durationList: string[] = String(
-            $(this)
-              .find(".spaced-content:nth-child(1)")
-              .find(".duration")
-              .text()
-          )
-            .trim()
-            .split("\n");
-          tempRiseSetData.duration = `${durationList[0]} ${durationList[
-            durationList.length - 1
-          ].trim()}`;
+          tempRiseSetData.icon = "https://www.accuweather.com" + $(this)
+            .find("img")
+            .attr("src")
+            ?.toString() as string;
+          tempRiseSetData.duration = $(this)
+            .find(".sunrise-sunset__phrase")
+            .text()
+            .trim();
           tempRiseSetData.rise = $(this)
-            .find(".spaced-content:nth-child(2)")
-            .find(".text-value:nth-child(2)")
+            .find(".sunrise-sunset__times-item:nth-child(1)")
+            .find(".sunrise-sunset__times-value")
             .text()
             .trim();
           tempRiseSetData.set = $(this)
-            .find(".spaced-content:nth-child(3)")
-            .find(".text-value:nth-child(2)")
+            .find(".sunrise-sunset__times-item:nth-child(2)")
+            .find(".sunrise-sunset__times-value")
             .text()
             .trim();
           tempRiseSetList.push(tempRiseSetData);

@@ -15,10 +15,6 @@
     font-weight: 500;
 }
 
-.day-night-wrapper__top--icon_day img {
-    width: 40px;
-}
-
 .day-night-wrapper__top--icon_day,
 .day-night-wrapper__top--date {
     width: fit-content;
@@ -29,6 +25,7 @@
 }
 
 .day-night-wrapper__top--icon_day img {
+    width: 40px;
     -webkit-filter: drop-shadow(0px 6px 2px #000000);
     filter: drop-shadow(0px 6px 2px #000000);
 }

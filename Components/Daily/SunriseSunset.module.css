@@ -12,6 +12,16 @@
     text-shadow: 0px 5px 7px #00000090;
 }
 
+.sunrise-sunset-wrapper-card_title img {
+    width: 40px;
+    -webkit-filter: drop-shadow(0px 6px 2px #000000);
+    filter: drop-shadow(0px 6px 2px #000000);
+}
+
+.sunrise-sunset-wrapper-card:nth-child(2){
+    margin-top: 20px;
+}
+
 @media screen and (max-width: 700px) {
     .sunrise-sunset-wrapper-card{
         width: 100%;

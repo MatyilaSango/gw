@@ -90,6 +90,7 @@ export type dayNightType = {
 }
 
 export type sunriseSunsetType = {
+    icon: string,
     duration: string,
     rise: string,
     set: string,

@@ -270,12 +270,14 @@ function App() {
               <div className={styles["sunrise-sunset-wrapper"]}>
                 <SunriseSunset
                   title="Sunrise"
+                  icon={dailyData?.data.sunrise_sunset.sunrise.icon}
                   duration={dailyData?.data.sunrise_sunset.sunrise.duration}
                   rise={dailyData?.data.sunrise_sunset.sunrise.rise}
                   set={dailyData?.data.sunrise_sunset.sunrise.set}
                 />
                 <SunriseSunset
                   title="Sunset"
+                  icon={dailyData?.data.sunrise_sunset.sunset.icon}
                   duration={dailyData?.data.sunrise_sunset.sunset.duration}
                   rise={dailyData?.data.sunrise_sunset.sunset.rise}
                   set={dailyData?.data.sunrise_sunset.sunset.set}
