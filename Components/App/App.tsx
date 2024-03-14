@@ -34,9 +34,20 @@ import WeatherMap from "../Map/WeatherMap";
 let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
+const useCustormSearchState = (): [search: searchDataType | undefined , (value: searchDataType) => void] => {
+  const searchValue: searchDataType = JSON.parse(localStorage.getItem("searchLocation") as string)
+  const [search, setSearchState] = useState<searchDataType | undefined>(searchValue ? searchValue : undefined)
+
+  function setSearch(value: searchDataType){
+    setSearchState(prev => prev = value);
+    localStorage.setItem("searchLocation", JSON.stringify(value))
+  }
+
+  return [search, setSearch]
+}
+
 function App() {
-  const [search, setSearch] = useState<searchDataType>();
-  const [ipData, setIpData] = useState<any>()
+  const [search, setSearch] = useCustormSearchState();
   const [todayData, setTodayData] = useState<todayDataType>();
   const [hourlyData, setHourlyData] = useState<hourlyDataType>();
   const [dailyData, setDailyData] = useState<dailyDataType>();
@@ -54,8 +65,7 @@ function App() {
       const getMyLocation = async (): Promise<void> => {
         const ipdata = await (await fetch("https://surfshark.com/api/v1/server/user")).json()
         const data = await (await fetch(`https://ipapi.co/${await ipdata.ip}/json/`)).json()
-        setSearch(prev => prev = {city: data.city, geo: {lat: data.latitude, long: data.longitude}})
-        setIpData(data)
+        setSearch({city: data.city, geo: {lat: data.latitude, long: data.longitude}})
       }
       getMyLocation()
     }
@@ -89,7 +99,7 @@ function App() {
       Promise.all([todayPromise, hourlyPromise, dailyPromise, monthlyPromise]) // To do add monthly promise
       document.title = "GW-Weather | " + search.city;
     }
-  }, [search]);
+  }, [search, reRender]);
 
   useEffect(() => {
     if (rootPage && search) {
@@ -119,7 +129,6 @@ function App() {
 
   const handleSetSearch = (parameter: searchDataType): void => {
     setSearch(parameter);
-    setIpData({...ipData, latitude: parameter.geo.lat, longitude: parameter.geo.long})
     setDailyData(undefined);
     setMonthlyData(undefined)
     setreRender(true);
@@ -179,7 +188,7 @@ function App() {
           {todayData && (
             <Today
               data={todayData?.data}
-              search={todayData?.search_parameter}
+              search={search}
               handleSetSearch={handleSetSearch}
               setBackgroundPic={setBackgroundPic}
               wallpaper={wallpaper}
@@ -311,12 +320,10 @@ function App() {
           </div>
           <div className= {styles["Map-wrapper__body"]}>
             <div className={`${styles["App__Calender-wrapper"]} ${styles["App__Calender-wrapper_map"]}`}>
-              <WeatherMap latitude={ipData.latitude} longitude={ipData.longitude} />
+              <WeatherMap latitude={search.geo.lat} longitude={search.geo.long} />
             </div>
           </div>
-          
         </div>
-        
       </div>
       ) : (
         ""

@@ -7,7 +7,7 @@ import locationsHandler from "../../Scapping/src/Controller/Location/Location";
 
 interface ITodayProps {
   data: todayType;
-  search: String;
+  search: searchDataType;
   handleSetSearch: (parameter: searchDataType) => void;
   setBackgroundPic: (value: React.SetStateAction<string>) => void;
   wallpaper: string;
@@ -32,19 +32,23 @@ export default function Today({
       let date = new Date();
       date.setHours(date.getUTCHours() + Number(data.offset.hours));
       date.setMinutes(date.getUTCMinutes() + Number(data.offset.minutes))
+
       if (date.getHours() === 12) {
         date.setHours(0)
       } else if (date.getHours() === 0) {
         date.setHours(12)
       }
+
       setTime((prev) => (prev = date));
-      if (
-        (date.getHours() >= 18 && date?.getHours() <= 24) ||
-        (date?.getHours() >= 0 && date?.getHours() <= 6)
-      ) {
+
+      if ((date.getHours() >= 18 && date?.getHours() <= 24) || (date?.getHours() >= 0 && date?.getHours() <= 6)) {
         setBackgroundPic((prev) => (prev = wallpaperNight));
       } else {
         setBackgroundPic((prev) => (prev = wallpaper));
+      }
+
+      if (date.getMinutes() === 0 && date.getSeconds() <= 1) { // Refresh every hour for new data.
+        handleSetSearch(search)
       }
     }, 1000);
 
@@ -112,7 +116,7 @@ export default function Today({
         <div className={styles["wrapper-weather-top-det"]}>
           <div className={styles["wrapper-weather-top-det__loc-type"]}>
             <div className={styles["loc"]}>
-              <div className={styles["loc-text"]}>{search}</div>
+              <div className={styles["loc-text"]}>{search.city}</div>
             </div>
             <div className={styles["type"]}>
               <span>{data.type}</span>
