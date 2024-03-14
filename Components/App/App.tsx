@@ -35,7 +35,10 @@ let wallpaper = require("../../Pics/weather_wallpaper.jpg");
 let wallpaperNight = require("../../Pics/gweatherNight.png");
 
 const useCustormSearchState = (): [search: searchDataType | undefined , (value: searchDataType) => void] => {
-  const searchValue: searchDataType = JSON.parse(localStorage.getItem("searchLocation") as string)
+  let searchValue = undefined
+  if(typeof window !== "undefined"){
+    searchValue = JSON.parse(localStorage.getItem("searchLocation") as string)
+  }
   const [search, setSearchState] = useState<searchDataType | undefined>(searchValue ? searchValue : undefined)
 
   function setSearch(value: searchDataType){
@@ -62,6 +65,8 @@ function App() {
 
   useEffect(() => {
     if (!search) {
+      const storageSearch: searchDataType = JSON.parse(localStorage.getItem("searchLocation") as string)
+      if(storageSearch) return setSearch(storageSearch)
       const getMyLocation = async (): Promise<void> => {
         const ipdata = await (await fetch("https://surfshark.com/api/v1/server/user")).json()
         const data = await (await fetch(`https://ipapi.co/${await ipdata.ip}/json/`)).json()
